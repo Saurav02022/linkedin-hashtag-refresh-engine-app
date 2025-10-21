@@ -91,44 +91,92 @@ LinkedIn creators waste valuable time on hashtag research:
 
 ### Installation
 
+Follow these steps to set up the project locally:
+
+**Step 1: Clone the Repository**
 ```bash
-# Clone the repository
 git clone https://github.com/saurav02022/linkedin-hashtag-refresh-engine.git
 cd linkedin-hashtag-refresh-engine
-
-# Install dependencies
-npm install
-
-# Copy environment variables
-cp .env.local.example .env.local
-
-# Add your Gemini API key to .env.local
-# GEMINI_API_KEY=your_api_key_here
-
-# Start development server
-npm run dev
 ```
 
-Visit [http://localhost:3000](http://localhost:3000) to see the app.
-
-### Environment Variables
-
-Create a `.env.local` file:
-
+**Step 2: Install Dependencies**
 ```bash
-# Required
-GEMINI_API_KEY=your_gemini_api_key_here
-
-# Optional
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-NODE_ENV=development
+npm install
 ```
 
-**Getting a Gemini API Key:**
+**Step 3: Set Up Environment Variables**
+```bash
+# Copy the example file
+cp .env.example .env.local
+
+# Edit .env.local and add your Gemini API key
+```
+
+**Step 4: Add Your API Key**
+
+Get your free Gemini API key:
 1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
 2. Sign in with your Google account
 3. Click "Create API Key"
 4. Copy and paste into `.env.local`
+
+**Step 5: Run Development Server**
+```bash
+npm run dev
+```
+
+Visit [http://localhost:3000](http://localhost:3000) to see the app running! 🚀
+
+### Environment Variables
+
+#### Required
+
+| Variable | Description | Where to Get |
+|----------|-------------|--------------|
+| `GEMINI_API_KEY` | Google Gemini API key for AI generation | [Get free key](https://makersuite.google.com/app/apikey) |
+
+#### Optional
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `NEXT_PUBLIC_APP_URL` | Your app's public URL | `http://localhost:3000` |
+| `NODE_ENV` | Environment mode | `development` |
+
+#### Future Features (Phase 2 & 3)
+
+- `LINKEDIN_CLIENT_ID` - For LinkedIn OAuth authentication
+- `LINKEDIN_CLIENT_SECRET` - For LinkedIn OAuth authentication
+- `LINKEDIN_REDIRECT_URI` - OAuth callback URL
+- Database, Stripe, Analytics - See [.env.example](./.env.example) for complete list
+
+### Available Scripts
+
+```bash
+npm run dev          # Start development server (http://localhost:3000)
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint to check code quality
+```
+
+### Troubleshooting
+
+**Problem: "Missing required environment variables: GEMINI_API_KEY"**
+- ✅ Make sure you've created `.env.local` from `.env.example`
+- ✅ Add your Gemini API key to `.env.local`
+- ✅ Restart the development server (`npm run dev`)
+
+**Problem: Build fails on Vercel**
+- ✅ Check that `GEMINI_API_KEY` is added in Vercel dashboard
+- ✅ Go to: Project Settings → Environment Variables
+- ✅ Add the key for all environments (Production, Preview, Development)
+- ✅ Redeploy the application
+
+**Problem: Module not found errors**
+- ✅ Delete `node_modules` and `package-lock.json`
+- ✅ Run `npm install` again
+- ✅ Restart your development server
+
+**Need more help?** [Open an issue](https://github.com/saurav02022/linkedin-hashtag-refresh-engine/issues)
 
 ---
 
