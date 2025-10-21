@@ -6,7 +6,7 @@
 
 Generate relevant, trending hashtags for your LinkedIn posts in seconds—not minutes.
 
-[Demo](https://your-demo-url.vercel.app) · [Documentation](#documentation) · [Report Bug](https://github.com/saurav02022/linkedin-hashtag-refresh-engine/issues) · [Request Feature](https://github.com/saurav02022/linkedin-hashtag-refresh-engine/issues)
+[Live Demo](https://ai-linkedin-hashtag-refresh-engine-app.vercel.app) · [Documentation](#documentation) · [Report Bug](https://github.com/saurav02022/linkedin-hashtag-refresh-engine/issues) · [Request Feature](https://github.com/saurav02022/linkedin-hashtag-refresh-engine/issues)
 
 </div>
 
@@ -330,7 +330,7 @@ We maintain comprehensive documentation for developers and stakeholders:
 3. Add environment variable: `GEMINI_API_KEY`
 4. Deploy
 
-Your app will be live at `https://your-app.vercel.app`
+Your app will be live at your custom Vercel URL (e.g., `https://your-project.vercel.app`)
 
 ### Self-Hosting
 

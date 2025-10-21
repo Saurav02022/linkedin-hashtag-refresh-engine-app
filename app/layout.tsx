@@ -15,8 +15,24 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "LinkedIn Hashtag Refresh Engine",
-  description: "AI-powered hashtag generation for LinkedIn posts",
+  title: "LinkedIn Hashtag Refresh Engine - AI-Powered Hashtag Generator",
+  description: "AI-powered hashtag generation for LinkedIn posts. Generate relevant, trending hashtags in seconds. Save 20+ minutes per post and boost your content reach.",
+  metadataBase: new URL('https://ai-linkedin-hashtag-refresh-engine-app.vercel.app'),
+  keywords: ['LinkedIn', 'hashtags', 'AI', 'content creation', 'social media', 'marketing'],
+  authors: [{ name: 'Saurav Kumar', url: 'https://github.com/saurav02022' }],
+  openGraph: {
+    title: 'LinkedIn Hashtag Refresh Engine',
+    description: 'Generate AI-powered hashtags for LinkedIn posts in seconds',
+    url: 'https://ai-linkedin-hashtag-refresh-engine-app.vercel.app',
+    siteName: 'LinkedIn Hashtag Refresh Engine',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'LinkedIn Hashtag Refresh Engine',
+    description: 'Generate AI-powered hashtags for LinkedIn posts in seconds',
+    creator: '@sk729584',
+  },
 }
 
 export default function RootLayout({

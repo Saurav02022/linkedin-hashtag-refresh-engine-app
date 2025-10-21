@@ -3,6 +3,14 @@
  * Single Responsibility: Centralized social links and profile information
  */
 
+/**
+ * Application URLs
+ */
+export const APP_URL = {
+  production: 'https://ai-linkedin-hashtag-refresh-engine-app.vercel.app',
+  development: 'http://localhost:3000',
+} as const
+
 export const SOCIAL_LINKS = {
   linkedin: 'https://www.linkedin.com/in/saurav02022/',
   github: 'https://github.com/saurav02022',
