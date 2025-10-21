@@ -5,6 +5,7 @@
 
 import Link from 'next/link'
 import { Hash, Linkedin, Twitter, Github } from 'lucide-react'
+import { SOCIAL_LINKS } from '@/lib/constants'
 
 export function AppFooter() {
   const currentYear = new Date().getFullYear()
@@ -27,7 +28,7 @@ export function AppFooter() {
             {/* Social Links */}
             <div className="flex items-center gap-3">
               <a
-                href="https://linkedin.com"
+                href={SOCIAL_LINKS.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-md border bg-background hover:bg-muted transition-colors flex items-center justify-center"
@@ -36,16 +37,16 @@ export function AppFooter() {
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
-                href="https://twitter.com"
+                href={SOCIAL_LINKS.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-md border bg-background hover:bg-muted transition-colors flex items-center justify-center"
-                aria-label="Twitter"
+                aria-label="X (Twitter)"
               >
                 <Twitter className="w-4 h-4" />
               </a>
               <a
-                href="https://github.com"
+                href={SOCIAL_LINKS.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-md border bg-background hover:bg-muted transition-colors flex items-center justify-center"
