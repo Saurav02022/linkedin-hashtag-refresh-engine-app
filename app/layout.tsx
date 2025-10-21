@@ -20,6 +20,10 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://ai-linkedin-hashtag-refresh-engine-app.vercel.app'),
   keywords: ['LinkedIn', 'hashtags', 'AI', 'content creation', 'social media', 'marketing'],
   authors: [{ name: 'Saurav Kumar', url: 'https://github.com/saurav02022' }],
+  icons: {
+    icon: '/icon',
+    apple: '/apple-icon',
+  },
   openGraph: {
     title: 'LinkedIn Hashtag Refresh Engine',
     description: 'Generate AI-powered hashtags for LinkedIn posts in seconds',
