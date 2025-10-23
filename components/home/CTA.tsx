@@ -9,6 +9,7 @@ import Link from 'next/link'
 import { ArrowRight, Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { ROUTES } from '@/lib/routes'
 
 export function CTA() {
   return (
@@ -36,7 +37,7 @@ export function CTA() {
             {/* CTA Button */}
             <div className="pt-4">
               <Button size="lg" className="text-base h-14 px-8" asChild>
-                <Link href="/login">
+                <Link href={ROUTES.LOGIN}>
                   Get Started Now
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Link>

@@ -4,6 +4,7 @@
  */
 
 import { useMutation } from '@tanstack/react-query'
+import { API_ENDPOINTS } from '@/lib/api-routes'
 import type { HashtagGenerationResponse } from '@/types'
 
 interface GenerateHashtagsRequest {
@@ -23,7 +24,7 @@ interface GenerateHashtagsResponse {
 async function generateHashtags(
   request: GenerateHashtagsRequest
 ): Promise<HashtagGenerationResponse[]> {
-  const response = await fetch('/api/hashtags/generate', {
+  const response = await fetch(API_ENDPOINTS.HASHTAGS_GENERATE, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -48,9 +49,7 @@ async function generateHashtags(
 export function useGenerateHashtags() {
   return useMutation({
     mutationFn: generateHashtags,
-    // Optional: Add onSuccess, onError callbacks here
     onSuccess: (data) => {
-      // Could track analytics here
       console.log(`Generated hashtags for ${data.length} posts`)
     },
     onError: (error) => {

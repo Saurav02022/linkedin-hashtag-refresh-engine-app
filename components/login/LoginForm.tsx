@@ -1,11 +1,15 @@
 /**
  * Login Form Component
- * Single Responsibility: Handle LinkedIn OAuth authentication
+ * Single Responsibility: Handle LinkedIn OAuth authentication with NextAuth.js
+ * 
+ * References:
+ * - https://next-auth.js.org/getting-started/client#signin
  */
 
 'use client'
 
 import { useState } from 'react'
+import { signIn } from 'next-auth/react'
 import { Linkedin, Loader2, Shield, UserCheck, Lock, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -24,18 +28,15 @@ export function LoginForm({ onLogin }: LoginFormProps) {
     setError(null)
 
     try {
-      // TODO: Implement LinkedIn OAuth flow
-      // For now, simulate loading
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      // Placeholder: Will be replaced with actual OAuth
-      if (onLogin) {
-        onLogin()
-      }
+      // Use NextAuth.js signIn function with LinkedIn provider
+      // Redirects to /dashboard on successful authentication
+      await signIn('linkedin', { 
+        callbackUrl: '/dashboard',
+        redirect: true,
+      })
     } catch (err) {
       setError('Failed to connect with LinkedIn. Please try again.')
       console.error('Login error:', err)
-    } finally {
       setIsLoading(false)
     }
   }
@@ -77,15 +78,15 @@ export function LoginForm({ onLogin }: LoginFormProps) {
           <p className="text-sm font-medium">We will NEVER:</p>
           <ul className="text-sm text-muted-foreground space-y-1">
             <li className="flex items-start gap-2">
-              <Lock className="w-4 h-4 mt-0.5 flex-shrink-0" />
+              <Lock className="w-4 h-4 mt-0.5 shrink-0" />
               <span>Create posts without your permission</span>
             </li>
             <li className="flex items-start gap-2">
-              <Lock className="w-4 h-4 mt-0.5 flex-shrink-0" />
+              <Lock className="w-4 h-4 mt-0.5 shrink-0" />
               <span>Send messages or connection requests</span>
             </li>
             <li className="flex items-start gap-2">
-              <Lock className="w-4 h-4 mt-0.5 flex-shrink-0" />
+              <Lock className="w-4 h-4 mt-0.5 shrink-0" />
               <span>Share your data with third parties</span>
             </li>
           </ul>

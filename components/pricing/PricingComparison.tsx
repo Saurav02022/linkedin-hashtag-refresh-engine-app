@@ -7,6 +7,7 @@
 
 import { Check, X } from 'lucide-react'
 import { Card } from '@/components/ui/card'
+import { ROUTES } from '@/lib/routes'
 
 interface Feature {
   category: string
@@ -173,7 +174,7 @@ export function PricingComparison() {
       <div className="mt-8 text-center">
         <p className="text-sm text-muted-foreground">
           Need a custom plan for your organization?{' '}
-          <a href="/contact" className="text-primary hover:underline font-medium">
+          <a href={ROUTES.CONTACT} className="text-primary hover:underline font-medium">  
             Contact sales
           </a>
         </p>

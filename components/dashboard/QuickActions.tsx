@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation'
 import { Hash, Plus, Settings } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { ROUTES } from '@/lib/routes'
 
 export function QuickActions() {
   const router = useRouter()
@@ -23,7 +24,7 @@ export function QuickActions() {
         <Button
           size="lg"
           className="w-full justify-start"
-          onClick={() => router.push('/posts')}
+          onClick={() => router.push(ROUTES.POSTS)}
         >
           <Hash className="w-5 h-5 mr-2" />
           Generate Hashtags
@@ -32,7 +33,7 @@ export function QuickActions() {
           variant="outline"
           size="lg"
           className="w-full justify-start"
-          onClick={() => router.push('/posts')}
+          onClick={() => router.push(ROUTES.POSTS)}
         >
           <Plus className="w-5 h-5 mr-2" />
           Add New Post
@@ -41,7 +42,7 @@ export function QuickActions() {
           variant="outline"
           size="lg"
           className="w-full justify-start"
-          onClick={() => router.push('/settings')}
+          onClick={() => router.push(ROUTES.SETTINGS)}
         >
           <Settings className="w-5 h-5 mr-2" />
           Configure Settings

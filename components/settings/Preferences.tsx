@@ -9,8 +9,10 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { Input } from '@/components/ui/input'
+import { useAuth } from '@/lib/contexts/AuthContext'
 
 export function Preferences() {
+  const { user } = useAuth()
   return (
     <Card>
       <CardHeader>
@@ -59,7 +61,9 @@ export function Preferences() {
         <div className="space-y-2">
           <h4 className="font-medium">Account</h4>
           <div className="space-y-1 text-sm">
-            <p className="text-muted-foreground">Email: guest@example.com</p>
+            <p className="text-muted-foreground">
+              Email: {user?.email || 'Not available'}
+            </p>
             <p className="text-muted-foreground">Plan: Free</p>
           </div>
         </div>

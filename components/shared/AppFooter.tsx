@@ -6,6 +6,7 @@
 import Link from 'next/link'
 import { Hash, Linkedin, Twitter, Github } from 'lucide-react'
 import { SOCIAL_LINKS } from '@/lib/constants'
+import { ROUTES } from '@/lib/routes'
 
 export function AppFooter() {
   const currentYear = new Date().getFullYear()
@@ -16,7 +17,7 @@ export function AppFooter() {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           {/* Brand & Description */}
           <div className="space-y-3 max-w-sm">
-            <Link href="/" className="flex items-center gap-2 font-semibold">
+            <Link href={ROUTES.HOME} className="flex items-center gap-2 font-semibold">
               <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                 <Hash className="w-5 h-5 text-primary" />
               </div>
@@ -29,19 +30,19 @@ export function AppFooter() {
 
           {/* Navigation Links */}
           <nav className="flex flex-wrap gap-6 text-sm text-muted-foreground">
-            <Link href="/#features" className="hover:text-foreground transition-colors">
+            <Link href={`${ROUTES.HOME}#features`} className="hover:text-foreground transition-colors">
               Features
             </Link>
-            <Link href="/pricing" className="hover:text-foreground transition-colors">
+            <Link href={ROUTES.PRICING} className="hover:text-foreground transition-colors">
               Pricing
             </Link>
-            <Link href="/dashboard" className="hover:text-foreground transition-colors">
+            <Link href={ROUTES.DASHBOARD} className="hover:text-foreground transition-colors">
               Dashboard
             </Link>
-            <Link href="/privacy" className="hover:text-foreground transition-colors">
+            <Link href={ROUTES.PRIVACY} className="hover:text-foreground transition-colors">
               Privacy
             </Link>
-            <Link href="/terms" className="hover:text-foreground transition-colors">
+            <Link href={ROUTES.TERMS} className="hover:text-foreground transition-colors">
               Terms
             </Link>
           </nav>

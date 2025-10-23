@@ -8,6 +8,7 @@
 import Link from 'next/link'
 import { Hash, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { ROUTES } from '@/lib/routes'
 
 export function HeroSection() {
   return (
@@ -37,7 +38,7 @@ export function HeroSection() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <Button size="lg" className="w-full sm:w-auto text-base" asChild>
-              <Link href="/login">
+              <Link href={ROUTES.LOGIN}>
                 Get Started Free
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Link>

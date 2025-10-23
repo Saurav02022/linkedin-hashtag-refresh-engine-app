@@ -10,6 +10,7 @@ import { Check, ArrowRight } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { ROUTES } from '@/lib/routes'
 
 export function PricingSection() {
   return (
@@ -60,7 +61,7 @@ export function PricingSection() {
             </CardContent>
             <CardFooter>
               <Button variant="outline" className="w-full" asChild>
-                <Link href="/login">Start Free</Link>
+                <Link href={ROUTES.LOGIN}>Start Free</Link>
               </Button>
             </CardFooter>
           </Card>
@@ -116,7 +117,7 @@ export function PricingSection() {
             </CardContent>
             <CardFooter>
               <Button className="w-full" asChild>
-                <Link href="/login?plan=pro">Start Pro Trial</Link>
+                <Link href={`${ROUTES.LOGIN}?plan=pro`}>Start Pro Trial</Link>
               </Button>
             </CardFooter>
           </Card>
@@ -125,7 +126,7 @@ export function PricingSection() {
         {/* CTA to Full Pricing */}
         <div className="text-center">
           <Link
-            href="/pricing"
+            href={ROUTES.PRICING}
             className="inline-flex items-center gap-2 text-primary hover:underline font-medium"
           >
             View detailed pricing comparison

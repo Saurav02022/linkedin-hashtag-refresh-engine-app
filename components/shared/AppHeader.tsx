@@ -7,7 +7,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Hash, Settings, Home, Menu, X, CreditCard } from 'lucide-react'
+import { Hash, Settings, Home, Menu, X, CreditCard, LogOut } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -20,14 +20,31 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
+import { useAuth } from '@/lib/contexts/AuthContext'
+import { ROUTES } from '@/lib/routes'
 
 interface AppHeaderProps {
   variant?: 'public' | 'authenticated'
 }
 
+/**
+ * Get user initials from name
+ * Example: "John Doe" -> "JD"
+ */
+function getUserInitials(name?: string): string {
+  if (!name) return 'U'
+  
+  const parts = name.trim().split(' ')
+  if (parts.length >= 2) {
+    return `${parts[0][0]}${parts[1][0]}`.toUpperCase()
+  }
+  return name.substring(0, 2).toUpperCase()
+}
+
 export function AppHeader({ variant = 'public' }: AppHeaderProps) {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { user, logout } = useAuth()
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
@@ -36,7 +53,7 @@ export function AppHeader({ variant = 'public' }: AppHeaderProps) {
           {/* Logo & Nav */}
           <div className="flex items-center gap-8">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 font-semibold text-lg">
+            <Link href={ROUTES.HOME} className="flex items-center gap-2 font-semibold text-lg">
               <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                 <Hash className="w-5 h-5 text-primary" />
               </div>
@@ -46,10 +63,10 @@ export function AppHeader({ variant = 'public' }: AppHeaderProps) {
             {/* Navigation - Authenticated */}
             {variant === 'authenticated' && (
               <nav className="hidden md:flex items-center gap-1">
-                <NavLink href="/dashboard" icon={Home} active={pathname === '/dashboard'}>
+                <NavLink href={ROUTES.DASHBOARD} icon={Home} active={pathname === ROUTES.DASHBOARD}>
                   Dashboard
                 </NavLink>
-                <NavLink href="/posts" icon={Hash} active={pathname === '/posts'}>
+                <NavLink href={ROUTES.POSTS} icon={Hash} active={pathname === ROUTES.POSTS}>
                   Generate
                 </NavLink>
               </nav>
@@ -71,7 +88,7 @@ export function AppHeader({ variant = 'public' }: AppHeaderProps) {
                   How It Works
                 </Link>
                 <Link 
-                  href="/pricing" 
+                  href={ROUTES.PRICING} 
                   className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Pricing
@@ -90,7 +107,7 @@ export function AppHeader({ variant = 'public' }: AppHeaderProps) {
                 className="hidden sm:flex"
                 asChild
               >
-                <Link href="/settings">
+                <Link href={ROUTES.SETTINGS}>
                   <Settings className="w-5 h-5" />
                   <span className="sr-only">Settings</span>
                 </Link>
@@ -101,9 +118,12 @@ export function AppHeader({ variant = 'public' }: AppHeaderProps) {
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="relative h-10 w-10 rounded-full">
                     <Avatar>
-                      <AvatarImage src="/avatar-placeholder.png" alt="User" />
+                      <AvatarImage 
+                        src={user?.avatar} 
+                        alt={user?.name || 'User'} 
+                      />
                       <AvatarFallback className="bg-primary/10 text-primary">
-                        U
+                        {getUserInitials(user?.name)}
                       </AvatarFallback>
                     </Avatar>
                   </Button>
@@ -111,27 +131,33 @@ export function AppHeader({ variant = 'public' }: AppHeaderProps) {
                 <DropdownMenuContent align="end" className="w-56">
                   <DropdownMenuLabel>
                     <div className="flex flex-col space-y-1">
-                      <p className="text-sm font-medium">Guest User</p>
-                      <p className="text-xs text-muted-foreground">
-                        Free Plan
+                      <p className="text-sm font-medium leading-none">
+                        {user?.name || 'User'}
+                      </p>
+                      <p className="text-xs text-muted-foreground leading-none">
+                        {user?.email || 'Free Plan'}
                       </p>
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <Link href="/settings" className="cursor-pointer">
+                    <Link href={ROUTES.SETTINGS} className="cursor-pointer">
                       <Settings className="w-4 h-4 mr-2" />
                       Settings
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link href="/settings/billing" className="cursor-pointer">
+                    <Link href={ROUTES.SETTINGS_BILLING} className="cursor-pointer">
                       <CreditCard className="w-4 h-4 mr-2" />
                       Billing
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem className="text-destructive cursor-pointer">
+                  <DropdownMenuItem 
+                    className="text-destructive cursor-pointer"
+                    onClick={logout}
+                  >
+                    <LogOut className="w-4 h-4 mr-2" />
                     Sign out
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -154,10 +180,10 @@ export function AppHeader({ variant = 'public' }: AppHeaderProps) {
           ) : (
             <div className="flex items-center gap-3">
               <Button variant="ghost" asChild className="hidden sm:flex">
-                <Link href="/login">Sign In</Link>
+                <Link href={ROUTES.LOGIN}>Sign In</Link>
               </Button>
               <Button asChild>
-                <Link href="/login">Get Started</Link>
+                <Link href={ROUTES.LOGIN}>Get Started</Link>
               </Button>
             </div>
           )}
@@ -167,16 +193,16 @@ export function AppHeader({ variant = 'public' }: AppHeaderProps) {
         {variant === 'authenticated' && mobileMenuOpen && (
           <div className="md:hidden py-4 border-t">
             <nav className="flex flex-col space-y-1">
-              <MobileNavLink href="/dashboard" active={pathname === '/dashboard'}>
+              <MobileNavLink href={ROUTES.DASHBOARD} active={pathname === ROUTES.DASHBOARD}>
                 Dashboard
               </MobileNavLink>
-              <MobileNavLink href="/posts" active={pathname === '/posts'}>
+              <MobileNavLink href={ROUTES.POSTS} active={pathname === ROUTES.POSTS}>
                 Generate
               </MobileNavLink>
-              <MobileNavLink href="/settings" active={pathname === '/settings'}>
+              <MobileNavLink href={ROUTES.SETTINGS} active={pathname === ROUTES.SETTINGS}>
                 Settings
               </MobileNavLink>
-              <MobileNavLink href="/settings/billing" active={pathname === '/settings/billing'}>
+              <MobileNavLink href={ROUTES.SETTINGS_BILLING} active={pathname === ROUTES.SETTINGS_BILLING}>
                 Billing
               </MobileNavLink>
             </nav>

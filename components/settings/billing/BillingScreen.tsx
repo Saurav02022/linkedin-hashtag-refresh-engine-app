@@ -23,6 +23,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { ROUTES } from '@/lib/routes'
 
 export function BillingScreen() {
   const [currentPlan] = useState<'free' | 'pro'>('free') // Would come from user state
@@ -166,7 +167,7 @@ export function BillingScreen() {
         <CardFooter className="flex flex-col sm:flex-row gap-3">
           {currentPlan === 'free' && (
             <Button asChild className="w-full sm:w-auto">
-              <Link href="/pricing">Upgrade to Pro</Link>
+              <Link href={ROUTES.PRICING}>Upgrade to Pro</Link>
             </Button>
           )}
           {currentPlan === 'pro' && (
@@ -175,7 +176,7 @@ export function BillingScreen() {
             </Button>
           )}
           <Button variant="ghost" asChild className="w-full sm:w-auto ml-auto">
-            <Link href="/pricing">
+            <Link href={ROUTES.PRICING}>
               View All Plans
               <ExternalLink className="w-4 h-4 ml-2" />
             </Link>
@@ -194,7 +195,7 @@ export function BillingScreen() {
               priority speed, analytics, and more. Only $9/month.
             </p>
             <Button size="sm" asChild>
-              <Link href="/pricing">Upgrade Now</Link>
+              <Link href={ROUTES.PRICING}>Upgrade Now</Link>
             </Button>
           </AlertDescription>
         </Alert>
@@ -290,7 +291,7 @@ export function BillingScreen() {
         </CardContent>
         <CardFooter>
           <Button variant="outline" asChild>
-            <Link href="/help">Visit Help Center</Link>
+            <Link href={ROUTES.HELP}>Visit Help Center</Link>
           </Button>
         </CardFooter>
       </Card>

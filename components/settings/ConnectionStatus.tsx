@@ -7,6 +7,7 @@
 
 import { useState } from 'react'
 import { CheckCircle2, XCircle, Linkedin, Loader2 } from 'lucide-react'
+import { signIn } from 'next-auth/react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {
@@ -21,21 +22,19 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { toast } from 'sonner'
+import { useAuth } from '@/lib/contexts/AuthContext'
 
 export function ConnectionStatus() {
-  const [isConnected, setIsConnected] = useState(false)
+  const { user, isAuthenticated, logout } = useAuth()
   const [isLoading, setIsLoading] = useState(false)
 
   async function handleConnect() {
     setIsLoading(true)
     try {
-      // TODO: Implement LinkedIn OAuth
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      setIsConnected(true)
-      toast.success('LinkedIn account connected successfully!')
+      // Redirect to LinkedIn OAuth using NextAuth
+      await signIn('linkedin', { callbackUrl: '/dashboard' })
     } catch (error) {
       toast.error('Failed to connect LinkedIn account')
-    } finally {
       setIsLoading(false)
     }
   }
@@ -43,9 +42,7 @@ export function ConnectionStatus() {
   async function handleDisconnect() {
     setIsLoading(true)
     try {
-      // TODO: Implement disconnect logic
-      await new Promise(resolve => setTimeout(resolve, 500))
-      setIsConnected(false)
+      await logout()
       toast.success('LinkedIn account disconnected')
     } catch (error) {
       toast.error('Failed to disconnect account')
@@ -66,21 +63,21 @@ export function ConnectionStatus() {
         {/* Status */}
         <div className="flex items-center justify-between p-4 rounded-lg border">
           <div className="flex items-center gap-3">
-            <div className={`p-2 rounded-lg ${isConnected ? 'bg-success/10' : 'bg-muted'}`}>
-              <Linkedin className={`w-5 h-5 ${isConnected ? 'text-success' : 'text-muted-foreground'}`} />
+            <div className={`p-2 rounded-lg ${isAuthenticated ? 'bg-success/10' : 'bg-muted'}`}>
+              <Linkedin className={`w-5 h-5 ${isAuthenticated ? 'text-success' : 'text-muted-foreground'}`} />
             </div>
             <div>
               <p className="font-medium">
-                {isConnected ? 'Connected' : 'Not Connected'}
+                {isAuthenticated ? 'Connected' : 'Not Connected'}
               </p>
               <p className="text-sm text-muted-foreground">
-                {isConnected
-                  ? 'Your LinkedIn account is connected'
+                {isAuthenticated
+                  ? `Connected as ${user?.name || user?.email}`
                   : 'Connect to start generating hashtags'}
               </p>
             </div>
           </div>
-          {isConnected ? (
+          {isAuthenticated ? (
             <CheckCircle2 className="w-5 h-5 text-success" />
           ) : (
             <XCircle className="w-5 h-5 text-muted-foreground" />
@@ -88,7 +85,7 @@ export function ConnectionStatus() {
         </div>
 
         {/* Actions */}
-        {isConnected ? (
+        {isAuthenticated ? (
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button variant="destructive" disabled={isLoading}>

@@ -10,6 +10,7 @@ import { AppFooter } from '@/components/shared/AppFooter'
 import { PricingCards } from './PricingCards'
 import { PricingFAQ } from './PricingFAQ'
 import { PricingComparison } from './PricingComparison'
+import { ROUTES } from '@/lib/routes'
 
 export function PricingScreen() {
   return (
@@ -62,7 +63,7 @@ export function PricingScreen() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
-                href="/login"
+                href={ROUTES.LOGIN}
                 className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8"
               >
                 Start Free Trial

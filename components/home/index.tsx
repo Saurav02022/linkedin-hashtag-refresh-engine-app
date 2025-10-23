@@ -3,6 +3,8 @@
  * Single Responsibility: Public landing/home page
  */
 
+'use client'
+
 import { AppHeader } from '@/components/shared/AppHeader'
 import { AppFooter } from '@/components/shared/AppFooter'
 import { HeroSection } from './HeroSection'
@@ -10,11 +12,14 @@ import { Features } from './Features'
 import { HowItWorks } from './HowItWorks'
 import { PricingSection } from './PricingSection'
 import { CTA } from './CTA'
+import { useAuth } from '@/lib/contexts/AuthContext'
 
 export function HomeScreen() {
+  const { isAuthenticated } = useAuth()
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <AppHeader variant="public" />
+      <AppHeader variant={isAuthenticated ? 'authenticated' : 'public'} />
       <main className="flex-1">
         <HeroSection />
         <Features />

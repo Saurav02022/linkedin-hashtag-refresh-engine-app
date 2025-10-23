@@ -4,7 +4,8 @@
  */
 
 import React from 'react'
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
+import { API_ENDPOINTS } from '@/lib/api-routes'
 import { useUserStore } from '@/lib/stores/userStore'
 
 interface User {
@@ -32,7 +33,7 @@ export const authKeys = {
 
 // Fetch current user
 async function fetchCurrentUser(): Promise<User | null> {
-  const response = await fetch('/api/auth/me')
+  const response = await fetch(API_ENDPOINTS.AUTH_ME)
 
   if (!response.ok) {
     throw new Error('Failed to fetch user')
@@ -53,7 +54,6 @@ export function useCurrentUser() {
   })
 
   // Update Zustand store when data changes
-  // Using React's useEffect since TanStack Query v5 removed onSuccess
   React.useEffect(() => {
     if (query.data !== undefined) {
       setUser(query.data)
@@ -63,24 +63,7 @@ export function useCurrentUser() {
   return query
 }
 
-// Hook to logout
-export function useLogout() {
-  const queryClient = useQueryClient()
-  const clearUser = useUserStore((state) => state.clearUser)
-
-  return useMutation({
-    mutationFn: async () => {
-      const response = await fetch('/api/auth/logout', { method: 'POST' })
-      if (!response.ok) {
-        throw new Error('Logout failed')
-      }
-    },
-    onSuccess: () => {
-      // Clear React Query cache
-      queryClient.clear()
-      // Clear Zustand store
-      clearUser()
-    },
-  })
-}
+// Note: Logout is handled by NextAuth's signOut() function
+// See: lib/contexts/AuthContext.tsx - useAuth().logout()
+// No need for TanStack Query here as signOut() is a redirect, not an API call
 

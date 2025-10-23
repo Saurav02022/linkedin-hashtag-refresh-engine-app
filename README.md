@@ -134,6 +134,10 @@ Visit [http://localhost:3000](http://localhost:3000) to see the app running! �
 | Variable | Description | Where to Get |
 |----------|-------------|--------------|
 | `GEMINI_API_KEY` | Google Gemini API key for AI generation | [Get free key](https://makersuite.google.com/app/apikey) |
+| `LINKEDIN_CLIENT_ID` | LinkedIn OAuth Client ID (NextAuth.js) | [LinkedIn Developers](https://www.linkedin.com/developers/apps) |
+| `LINKEDIN_CLIENT_SECRET` | LinkedIn OAuth Client Secret (NextAuth.js) | [LinkedIn Developers](https://www.linkedin.com/developers/apps) |
+| `NEXTAUTH_URL` | Application URL for NextAuth callbacks | `http://localhost:3000` (dev) |
+| `NEXTAUTH_SECRET` | Secret for NextAuth session encryption | Generate with `openssl rand -base64 32` |
 
 #### Optional
 
@@ -142,11 +146,47 @@ Visit [http://localhost:3000](http://localhost:3000) to see the app running! �
 | `NEXT_PUBLIC_APP_URL` | Your app's public URL | `http://localhost:3000` |
 | `NODE_ENV` | Environment mode | `development` |
 
-#### Future Features (Phase 2 & 3)
+#### LinkedIn OAuth Setup (NextAuth.js)
 
-- `LINKEDIN_CLIENT_ID` - For LinkedIn OAuth authentication
-- `LINKEDIN_CLIENT_SECRET` - For LinkedIn OAuth authentication
-- `LINKEDIN_REDIRECT_URI` - OAuth callback URL
+This app uses [NextAuth.js](https://next-auth.js.org/) for secure authentication.
+
+1. **Create LinkedIn App**
+   - Visit [LinkedIn Developers](https://www.linkedin.com/developers/apps)
+   - Click "Create app" and fill in app details
+   
+2. **Configure OAuth Settings**
+   - In **Auth** tab, copy Client ID and Client Secret
+   - Add redirect URLs (NextAuth.js standard callback):
+     - Development: `http://localhost:3000/api/auth/callback/linkedin`
+     - Production: `https://yourdomain.com/api/auth/callback/linkedin`
+   
+3. **Request OAuth Scopes**
+   - In **Products** tab, request these products:
+     - ✅ Sign In with LinkedIn using OpenID Connect
+     - ✅ Share on LinkedIn (for posting hashtags)
+   
+4. **Add to .env.local**
+   ```bash
+   # LinkedIn OAuth (NextAuth)
+   LINKEDIN_CLIENT_ID=your_client_id_here
+   LINKEDIN_CLIENT_SECRET=your_client_secret_here
+   
+   # NextAuth Configuration
+   NEXTAUTH_URL=http://localhost:3000
+   NEXTAUTH_SECRET=$(openssl rand -base64 32)
+   
+   # Gemini API
+   GEMINI_API_KEY=your_gemini_api_key
+   ```
+
+**Note:** NextAuth.js automatically handles:
+- Session management with JWT
+- CSRF protection
+- Secure cookie handling
+- Token refresh
+
+#### Future Features
+
 - Database, Stripe, Analytics - See [.env.example](./.env.example) for complete list
 
 ### Available Scripts
@@ -165,10 +205,26 @@ npm run lint         # Run ESLint to check code quality
 - ✅ Add your Gemini API key to `.env.local`
 - ✅ Restart the development server (`npm run dev`)
 
+**Problem: "LinkedIn OAuth not configured" or "Callback URL mismatch"**
+- ✅ Verify `LINKEDIN_CLIENT_ID` and `LINKEDIN_CLIENT_SECRET` are set in `.env.local`
+- ✅ Check redirect URI in LinkedIn app: `http://localhost:3000/api/auth/callback/linkedin`
+- ✅ Ensure `NEXTAUTH_URL` matches your application URL
+- ✅ Verify `NEXTAUTH_SECRET` is set (generate with `openssl rand -base64 32`)
+- ✅ Ensure OAuth scopes (OpenID Connect + Share on LinkedIn) are approved
+- ✅ Restart the development server
+
+**Problem: NextAuth session issues**
+- ✅ Clear browser cookies and try again
+- ✅ Verify `NEXTAUTH_SECRET` is at least 32 characters
+- ✅ Ensure cookies are enabled in your browser
+- ✅ Try using `http://localhost:3000` instead of `127.0.0.1`
+- ✅ Check browser console for NextAuth errors
+
 **Problem: Build fails on Vercel**
-- ✅ Check that `GEMINI_API_KEY` is added in Vercel dashboard
+- ✅ Check that all required environment variables are added in Vercel dashboard
 - ✅ Go to: Project Settings → Environment Variables
-- ✅ Add the key for all environments (Production, Preview, Development)
+- ✅ Add keys for all environments (Production, Preview, Development)
+- ✅ Update `LINKEDIN_REDIRECT_URI` to use production URL
 - ✅ Redeploy the application
 
 **Problem: Module not found errors**
@@ -278,7 +334,9 @@ linkedin-hashtag-refresh-engine-app/
 │   ├── providers/            # Context providers
 │   ├── stores/               # Zustand stores
 │   ├── utils/                # Helper functions
-│   └── validations/          # Zod schemas
+│   ├── validations/          # Zod schemas
+│   ├── routes.ts             # Centralized route paths
+│   └── api-routes.ts         # Centralized API endpoints
 │
 ├── types/                    # TypeScript types
 │   ├── api.ts                # API types

@@ -7,6 +7,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { Toaster } from "@/components/ui/sonner"
 import { QueryProvider } from "@/lib/providers/QueryProvider"
+import { AuthProvider } from "@/lib/providers/AuthProvider"
 import "./globals.css"
 
 const inter = Inter({
@@ -47,10 +48,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <body className="antialiased min-h-screen bg-background">
-        <QueryProvider>
-          {children}
-          <Toaster position="top-right" />
-        </QueryProvider>
+        <AuthProvider>
+          <QueryProvider>
+            {children}
+            <Toaster position="top-right" />
+          </QueryProvider>
+        </AuthProvider>
       </body>
     </html>
   )

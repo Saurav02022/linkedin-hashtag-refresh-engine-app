@@ -1,11 +1,17 @@
 /**
  * Authentication Context
- * Single Responsibility: Manage authentication state
+ * Single Responsibility: Provide auth state using NextAuth.js
+ * 
+ * This is a wrapper around NextAuth's useSession hook to maintain
+ * compatibility with existing code while using NextAuth under the hood.
+ * 
+ * References:
+ * - https://next-auth.js.org/getting-started/client#usesession
  */
 
 'use client'
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { useSession, signOut } from 'next-auth/react'
 
 interface User {
   id: string
@@ -19,66 +25,38 @@ interface AuthContextType {
   user: User | null
   isAuthenticated: boolean
   isLoading: boolean
-  login: (user: User) => void
   logout: () => void
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined)
+/**
+ * useAuth Hook
+ * Wraps NextAuth's useSession for consistent API
+ * Handles automatic logout on token refresh failures
+ */
+export function useAuth(): AuthContextType {
+  const { data: session, status } = useSession()
 
-export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    // Check for existing session
-    checkAuth()
-  }, [])
-
-  async function checkAuth() {
-    try {
-      // TODO: Implement session check API call
-      // const response = await fetch('/api/auth/me')
-      // if (response.ok) {
-      //   const data = await response.json()
-      //   setUser(data.user)
-      // }
-    } catch (error) {
-      console.error('Auth check failed:', error)
-    } finally {
-      setIsLoading(false)
-    }
+  // Handle token refresh errors
+  // If token refresh fails, automatically sign out user
+  if (session?.error === 'RefreshAccessTokenError') {
+    signOut({ callbackUrl: '/login?error=SessionExpired' })
   }
 
-  function login(userData: User) {
-    setUser(userData)
-  }
+  const user: User | null = session?.user
+    ? {
+        id: session.user.id,
+        name: session.user.name || '',
+        email: session.user.email || '',
+        linkedInId: session.user.linkedInId,
+        avatar: session.user.image || undefined,
+      }
+    : null
 
-  function logout() {
-    setUser(null)
-    // TODO: Call logout API
-    // fetch('/api/auth/logout', { method: 'POST' })
+  return {
+    user,
+    isAuthenticated: !!session && !session.error,
+    isLoading: status === 'loading',
+    logout: () => signOut({ callbackUrl: '/' }),
   }
-
-  return (
-    <AuthContext.Provider
-      value={{
-        user,
-        isAuthenticated: !!user,
-        isLoading,
-        login,
-        logout,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  )
-}
-
-export function useAuth() {
-  const context = useContext(AuthContext)
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider')
-  }
-  return context
 }
 
