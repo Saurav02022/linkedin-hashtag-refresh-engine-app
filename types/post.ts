@@ -5,13 +5,36 @@
 
 export interface LinkedInPost {
   id: string
-  userId: string
-  linkedinPostUrl: string
-  postContent?: string
-  postAuthor?: string
-  postDate?: Date
-  createdAt: Date
-  updatedAt: Date
+  url: string
+  content: string
+  createdAt: string
+  author: {
+    id: string
+    name: string
+    avatar?: string
+  }
+  engagement?: {
+    likes: number
+    comments: number
+    shares: number
+  }
+  hasHashtags: boolean
+  existingHashtagComment?: string | null
+  autoRefreshSchedule?: {
+    id: string
+    intervalHours: number
+    nextRefreshAt: string
+    status: 'active' | 'paused' | 'completed'
+  } | null
+}
+
+export interface FetchPostsResponse {
+  posts: LinkedInPost[]
+  pagination: {
+    total: number
+    hasMore: boolean
+    nextOffset: number
+  }
 }
 
 export interface PostInput {

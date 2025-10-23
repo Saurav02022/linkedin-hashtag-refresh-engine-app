@@ -15,18 +15,13 @@ export const postUrlSchema = z
   })
 
 export const postFormSchema = z.object({
-  urls: z
+  url: z
     .string()
-    .min(1, 'Please enter at least one URL')
-    .refine(
-      (val) => {
-        const urls = val.split('\n').filter((url) => url.trim())
-        return urls.length >= 1 && urls.length <= 10
-      },
-      {
-        message: 'Please enter between 1 and 10 URLs',
-      }
-    ),
+    .min(1, 'LinkedIn post URL is required')
+    .url('Please enter a valid URL')
+    .refine(isValidLinkedInUrl, {
+      message: 'Must be a valid LinkedIn post URL (e.g., https://linkedin.com/posts/...)',
+    }),
 })
 
 export type PostFormInput = z.infer<typeof postFormSchema>

@@ -57,11 +57,13 @@ LinkedIn creators waste valuable time on hashtag research:
 
 ### Core Features
 
-- **AI-Powered Generation** - Google Gemini 1.5 Flash analyzes your content
+- **AI-Powered Generation** - Google Gemini 2.5 Flash analyzes your content with advanced prompting
+- **Strategic Batches** - Get 3 curated strategies: Maximum Reach, Viral Potential, Engagement Focus
 - **Lightning Fast** - Get results in 2-3 seconds
-- **Batch Processing** - Handle 1-10 posts simultaneously
-- **One-Click Copy** - Copy all hashtags to clipboard instantly
-- **Professional UI** - Clean, LinkedIn-branded interface
+- **Automatic Content Extraction** - Paste URL, we extract content automatically (no manual copy-paste)
+- **Editable Selection** - Add/remove hashtags before posting
+- **One-Click Posting** - Post hashtags directly to LinkedIn as a comment
+- **Professional UI** - Clean, responsive, accessible interface
 
 ### SaaS Features
 
@@ -240,21 +242,63 @@ npm run lint         # Run ESLint to check code quality
 
 ### Basic Workflow
 
-1. **Navigate** to `/posts` or click "Generate" in the header
-2. **Paste** your LinkedIn post URL(s) (1-10 URLs, one per line)
-3. **Click** "Generate Hashtags"
-4. **Copy** the generated hashtags with one click
-5. **Paste** them as a comment on your LinkedIn post
+1. **Login** with your LinkedIn account (OAuth)
+2. **Navigate** to `/posts` or click "Generate" from dashboard
+3. **Paste** your LinkedIn post URL
+4. **Click** "Generate Hashtags" - AI extracts content & analyzes it
+5. **Choose Strategy** - Select from 3 curated batches (or mix & match)
+6. **Customize** - Add/remove hashtags as needed
+7. **Post to LinkedIn** - One-click posting as a comment
+8. **Manual Cleanup** (if needed) - Delete old hashtag comments on LinkedIn
 
 ### Example
 
 ```
-Input:  https://linkedin.com/posts/johndoe-123456789
-Output: #javascript #webdev #coding #programming #developer
-        #softwaredevelopment #tech #computerscience #webdevelopment
+Input URL:  https://linkedin.com/posts/johndoe-activity-123456789
+
+AI Analysis: Extracts content automatically
+             Generates 3 strategic batches:
+             
+Batch 1 (Recommended): Maximum Reach
+  #javascript #programming #webdevelopment #coding
+  #developer #tech #frontend #reactjs #typescript
+  #softwaredevelopment #webdev #learntocode
+
+Batch 2: Viral Potential (high-volume tags)
+Batch 3: Engagement Focus (niche targeting)
+
+User Action: Selects Batch 1 (or customizes)
+Result:      Posted as comment on LinkedIn ✓
+             (User deletes old comment if exists)
 ```
 
-**Time saved:** 20+ minutes per post → 2-3 seconds ⚡
+**Time saved:** 20-30 minutes per post → 3-5 seconds ⚡
+
+### Important Note: Old Comment Deletion
+
+Due to LinkedIn API limitations, the app **cannot automatically delete old hashtag comments**:
+- ✅ The app **can post** new comments (via `w_member_social` permission)
+- ❌ The app **cannot read or delete** comments (requires `r_member_social` - partner-only)
+
+**What this means for you:**
+- New hashtags are posted automatically as a comment ✅
+- If you have old hashtag comments, **manually delete them first** (takes < 10 seconds)
+- For auto-refresh (Phase 3), you'll receive email reminders to delete old comments
+
+This is the same limitation that tools like Buffer and Hootsuite face with standard LinkedIn API access.
+
+### Why Manual URL Input?
+
+LinkedIn's API has strict permissions. Reading user posts requires `r_member_social` permission, which is **restricted to select partners only** (like Hootsuite, Buffer, Sprout Social).
+
+Standard apps with "Share on LinkedIn" product only get `w_member_social` (write permission) - which is perfect for posting hashtags as comments!
+
+This manual URL approach is the **industry standard** and offers benefits:
+- ✅ **Privacy-focused** - You choose which posts to optimize
+- ✅ **Intentional** - Deliberate decision for each post
+- ✅ **Works perfectly** - All features functional (generate + post + auto-refresh)
+
+**Reference:** [LinkedIn UGC Post API Permissions](https://learn.microsoft.com/en-us/linkedin/marketing/community-management/shares/ugc-post-api#permissions)
 
 ### API Example
 
@@ -409,35 +453,50 @@ npm start
 
 ## Roadmap
 
-### ✅ Phase 1: MVP (Completed)
-- AI hashtag generation with Google Gemini
-- Batch processing (1-10 posts)
-- Copy to clipboard functionality
-- Responsive design & accessibility
-- SaaS pricing (Free & Pro tiers)
-- Billing management UI
+### ✅ Phase 1: Auth + Manual Generation (Completed)
+- ✅ NextAuth.js LinkedIn OAuth
+- ✅ Token refresh (60-day tokens)
+- ✅ User dashboard
+- ✅ Manual URL input
+- ✅ Copy to clipboard functionality
 
-### 🔄 Phase 2: Monetization (In Progress)
+### ✅ Phase 2: AI Generation + Posting (Completed)
+- ✅ Automatic content extraction (Puppeteer)
+- ✅ AI hashtag generation (Gemini 2.5 Flash)
+- ✅ Strategic batch selection (3 strategies)
+- ✅ Editable hashtag selection
+- ✅ One-click posting to LinkedIn
+- ✅ Success notifications + error handling
+- ✅ Responsive design & accessibility
+
+### 🔄 Phase 3: Auto-Refresh MVP (In Progress)
+- [ ] Supabase database setup
+- [ ] Schedule creation UI
+- [ ] Cron job for automatic refreshes
+- [ ] Email notifications (with delete reminders)
+- [ ] Refresh history tracking
+- [ ] Usage tracking & limits
+
+### 🎯 Phase 4: Monetization (Planned)
 - [ ] Stripe payment integration
-- [ ] Usage tracking & limit enforcement
-- [ ] Subscription management (upgrade/downgrade)
-- [ ] Automated billing & invoices
-- [ ] Email notifications
+- [ ] Free (10 gen/mo) vs Pro ($9/mo unlimited)
+- [ ] Pro: 10 active auto-refresh schedules
+- [ ] Subscription management
+- [ ] Billing page & invoice history
 
-### 🎯 Phase 3: Enhanced Features (Planned)
-- [ ] LinkedIn OAuth authentication
-- [ ] Automated hashtag posting
+### 🎯 Phase 5: Enhanced Features (Planned)
 - [ ] Post history & analytics
+- [ ] Engagement tracking (before/after refresh)
 - [ ] Team collaboration (multi-user workspaces)
 - [ ] API access for Pro users
 - [ ] Custom hashtag templates
-- [ ] Performance analytics
+- [ ] A/B test refresh intervals
 
-### 🚀 Phase 4: Scale (Future)
+### 🚀 Phase 6: Scale (Future)
 - [ ] Enterprise plan for large teams
 - [ ] White-label option
 - [ ] Mobile native apps (iOS/Android)
-- [ ] Browser extension
+- [ ] Browser extension (for easier cookie management)
 - [ ] Integrations (Zapier, Buffer, Hootsuite)
 
 See our [GitHub Projects](https://github.com/saurav02022/linkedin-hashtag-refresh-engine/projects) for detailed progress.

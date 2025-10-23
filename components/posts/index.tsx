@@ -14,11 +14,11 @@ import { useGenerateHashtags } from '@/lib/hooks'
 export function PostsScreen() {
   const { mutate: generateHashtags, data: posts = [], isPending, error, reset } = useGenerateHashtags()
 
-  function handleGenerateHashtags(urls: string[]) {
+  function handleGenerateHashtags(url: string) {
     // Reset previous error
     reset()
-    // Generate hashtags using TanStack Query
-    generateHashtags({ urls })
+    // Generate hashtags using TanStack Query (API still expects array format)
+    generateHashtags({ urls: [url] })
   }
 
   return (
@@ -52,7 +52,7 @@ export function PostsScreen() {
         <EmptyState
           icon={FileText}
           title="No hashtags generated yet"
-          description="Enter LinkedIn post URLs above to generate AI-powered hashtags that boost your content reach."
+          description="Enter a LinkedIn post URL above to generate AI-powered hashtags that boost your content reach."
         />
       ) : null}
     </div>

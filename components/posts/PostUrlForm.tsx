@@ -7,7 +7,7 @@
 
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Loader2 } from 'lucide-react'
+import { Loader2, Info, AlertCircle } from 'lucide-react'
 import {
   Form,
   FormControl,
@@ -18,11 +18,12 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
+import { Input } from '@/components/ui/input'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { postFormSchema, type PostFormInput } from '@/lib/validations'
 
 interface PostUrlFormProps {
-  onSubmit: (urls: string[]) => void
+  onSubmit: (url: string) => void
   isLoading?: boolean
 }
 
@@ -30,38 +31,44 @@ export function PostUrlForm({ onSubmit, isLoading }: PostUrlFormProps) {
   const form = useForm<PostFormInput>({
     resolver: zodResolver(postFormSchema),
     defaultValues: {
-      urls: '',
+      url: '',
     },
   })
 
   function handleSubmit(data: PostFormInput) {
-    // Split and clean URLs after validation
-    const urls = data.urls
-      .split('\n')
-      .filter((url) => url.trim())
-      .map((url) => url.trim())
-    
-    onSubmit(urls)
+    onSubmit(data.url)
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+        {/* Important Notice */}
+        <Alert className="border-primary/50 bg-primary/5">
+          <Info className="h-4 w-4 text-primary" />
+          <AlertTitle className="text-primary">Important: Use Your Own Posts</AlertTitle>
+          <AlertDescription>
+            Only paste URLs of posts <strong>you created</strong> or <strong>reposted</strong>. 
+            You can only add hashtag comments to your own content. LinkedIn will reject attempts 
+            to comment on other people's posts.
+          </AlertDescription>
+        </Alert>
+
         <FormField
           control={form.control}
-          name="urls"
+          name="url"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>LinkedIn Post URLs</FormLabel>
+              <FormLabel>LinkedIn Post URL</FormLabel>
               <FormControl>
-                <Textarea
-                  placeholder="https://linkedin.com/posts/..."
-                  className="min-h-[150px] font-mono text-sm resize-none"
+                <Input
+                  type="url"
+                  placeholder="https://www.linkedin.com/posts/your-username-123456789"
+                  className="font-mono text-sm"
                   {...field}
                 />
               </FormControl>
               <FormDescription>
-                Enter 1-10 LinkedIn post URLs, one per line
+                Paste the URL of a LinkedIn post you created or reposted
               </FormDescription>
               <FormMessage />
             </FormItem>

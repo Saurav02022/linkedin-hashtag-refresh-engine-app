@@ -18,21 +18,21 @@ export function HeroSection() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
             <Hash className="w-4 h-4" />
-            AI-Powered Hashtag Generation
+            AI-Powered Auto-Refresh Engine
           </div>
 
           {/* Headline */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight">
-            Stop Wasting Time on
+            Keep Your LinkedIn Posts
             <span className="block text-primary mt-2">
-              LinkedIn Hashtags
+              Fresh & Visible
             </span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Generate AI-powered, relevant hashtags for your LinkedIn posts in seconds. 
-            Save 20+ minutes per post and boost your content reach.
+            Generate AI-powered hashtags in seconds AND auto-refresh them every 48 hours. 
+            Maintain peak engagement on your evergreen content effortlessly.
           </p>
 
           {/* CTA Buttons */}
@@ -58,7 +58,7 @@ export function HeroSection() {
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-success" />
-              <span>No Credit Card Required</span>
+              <span>Auto-Refresh Every 48h</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-success" />

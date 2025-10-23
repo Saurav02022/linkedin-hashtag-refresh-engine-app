@@ -3,10 +3,16 @@
  * Single Responsibility: Display product features
  */
 
-import { Sparkles, Zap, TrendingUp, Shield, Clock, Copy } from 'lucide-react'
+import { Sparkles, Zap, TrendingUp, Shield, Clock, Copy, RefreshCw, Calendar } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 const features = [
+  {
+    icon: RefreshCw,
+    title: 'Auto-Refresh Hashtags',
+    description: 'Set it and forget it! Automatically refresh hashtags every 24-168 hours to maintain peak engagement on evergreen content.',
+    highlight: true,
+  },
   {
     icon: Sparkles,
     title: 'AI-Powered Generation',
@@ -18,24 +24,19 @@ const features = [
     description: 'Get 10-12 professionally selected hashtags in just 2-3 seconds. No more manual research.',
   },
   {
-    icon: TrendingUp,
-    title: 'Boost Your Reach',
-    description: 'Strategic mix of broad and niche hashtags to maximize your post visibility and engagement.',
+    icon: Calendar,
+    title: 'Smart Scheduling',
+    description: 'Choose your refresh interval: every 24h, 48h (recommended), 72h, weekly, or set a custom schedule.',
   },
   {
-    icon: Copy,
-    title: 'One-Click Copy',
-    description: 'Copy all hashtags to clipboard instantly and paste them as a comment on your LinkedIn post.',
+    icon: TrendingUp,
+    title: 'Maintain Engagement',
+    description: 'Keep your old posts visible as hashtags lose 80% effectiveness after 48 hours. Fresh tags = sustained reach.',
   },
   {
     icon: Clock,
-    title: 'Save 20+ Minutes',
-    description: 'Stop researching hashtags manually. Focus on creating great content instead.',
-  },
-  {
-    icon: Shield,
-    title: 'Spam-Free Guarantee',
-    description: 'Advanced filtering removes spammy hashtags. Only professional, relevant tags.',
+    title: 'Save Hours Weekly',
+    description: 'Eliminate manual hashtag research and updates. Focus on creating great content instead.',
   },
 ]
 
@@ -68,16 +69,30 @@ interface FeatureCardProps {
   icon: React.ElementType
   title: string
   description: string
+  highlight?: boolean
 }
 
-function FeatureCard({ icon: Icon, title, description }: FeatureCardProps) {
+function FeatureCard({ icon: Icon, title, description, highlight }: FeatureCardProps) {
   return (
-    <Card className="border-2 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+    <Card className={`border-2 hover:shadow-lg transition-all duration-300 ${
+      highlight 
+        ? 'border-primary bg-primary/5 hover:border-primary' 
+        : 'hover:border-primary/50'
+    }`}>
       <CardHeader>
-        <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-          <Icon className="w-6 h-6 text-primary" />
+        <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${
+          highlight ? 'bg-primary text-primary-foreground' : 'bg-primary/10'
+        }`}>
+          <Icon className={`w-6 h-6 ${highlight ? '' : 'text-primary'}`} />
         </div>
-        <CardTitle className="text-xl">{title}</CardTitle>
+        <CardTitle className="text-xl flex items-center gap-2">
+          {title}
+          {highlight && (
+            <span className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded-full">
+              Pro
+            </span>
+          )}
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <CardDescription className="text-base leading-relaxed">

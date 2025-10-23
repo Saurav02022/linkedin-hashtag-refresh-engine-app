@@ -22,9 +22,19 @@ export interface HashtagGenerationRequest {
   count?: number
 }
 
+export interface HashtagBatch {
+  id: string
+  strategy: string
+  description: string
+  hashtags: string[]
+  recommended?: boolean
+}
+
 export interface HashtagGenerationResponse {
   postUrl: string
-  hashtags: string[]
+  postId?: string
+  hashtags: string[] // Legacy: default selected hashtags
+  batches?: HashtagBatch[] // New: multiple strategy batches
   metadata: {
     model: string
     tokensUsed: number

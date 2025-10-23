@@ -9,5 +9,8 @@ export const API_ENDPOINTS = {
   
   // Hashtags
   HASHTAGS_GENERATE: '/api/hashtags/generate',
+  
+  // LinkedIn
+  LINKEDIN_POST_COMMENT: '/api/linkedin/posts/:postId/comment',
 } as const
 

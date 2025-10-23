@@ -6,6 +6,7 @@
 'use client'
 
 import { HashtagDisplay } from './HashtagDisplay'
+import { HashtagBatchSelector } from './HashtagBatchSelector'
 import { LoadingSpinner } from '@/components/shared'
 import { Card, CardContent } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -42,13 +43,23 @@ export function PostsList({ posts, isLoading }: PostsListProps) {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-8">
       {posts.map((post, index) => (
-        <HashtagDisplay
-          key={index}
-          postUrl={post.postUrl}
-          hashtags={post.hashtags}
-        />
+        <div key={index}>
+          {post.batches && post.batches.length > 0 ? (
+            // New: Display batch selector with strategies
+            <HashtagBatchSelector
+              postUrl={post.postUrl}
+              batches={post.batches}
+            />
+          ) : (
+            // Legacy: Display simple hashtag list
+            <HashtagDisplay
+              postUrl={post.postUrl}
+              hashtags={post.hashtags}
+            />
+          )}
+        </div>
       ))}
     </div>
   )

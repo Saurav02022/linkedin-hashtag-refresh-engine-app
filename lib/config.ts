@@ -11,7 +11,7 @@ export const config = {
   api: {
     gemini: {
       apiKey: process.env.GEMINI_API_KEY || '',
-      model: 'gemini-1.5-flash',
+      model: 'gemini-2.5-flash',
     },
   },
   linkedin: {
@@ -21,8 +21,8 @@ export const config = {
   },
   features: {
     maxPostsPerRequest: 10,
-    maxHashtagsPerPost: 15,
-    minHashtagsPerPost: 5,
+    maxHashtagsPerPost: 12,
+    minHashtagsPerPost: 10,
   },
 } as const
 
