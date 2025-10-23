@@ -1,0 +1,69 @@
+version: '3.9'
+
+services:
+  app-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      args:
+        NODE_ENV: development
+    container_name: linkedin-hashtag-engine-dev
+    ports:
+      - "3000:3000"
+    environment:
+      # Node environment
+      - NODE_ENV=development
+      - PORT=3000
+      
+      # NextAuth.js (Required)
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - NEXTAUTH_URL=${NEXTAUTH_URL:-http://localhost:3000}
+      
+      # LinkedIn OAuth (Required)
+      - LINKEDIN_CLIENT_ID=${LINKEDIN_CLIENT_ID}
+      - LINKEDIN_CLIENT_SECRET=${LINKEDIN_CLIENT_SECRET}
+      
+      # AI API (Required)
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      
+      # App configuration
+      - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+      
+      # Puppeteer configuration
+      - PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+      - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+      
+      # Enable Next.js fast refresh
+      - WATCHPACK_POLLING=true
+    
+    # Optional: Load from .env.local
+    env_file:
+      - .env.local
+    
+    # Mount source code for hot reload
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    
+    # Auto-restart on crash
+    restart: unless-stopped
+    
+    # Network
+    networks:
+      - app-network
+    
+    # Run development server
+    command: npm run dev
+    
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  app-network:
+    driver: bridge
+
