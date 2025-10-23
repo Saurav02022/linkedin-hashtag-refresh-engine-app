@@ -9,30 +9,7 @@
  * - Respects LinkedIn's robots.txt for public content viewing
  */
 
-import { Browser, Page } from 'puppeteer-core'
-
-// Dynamic import for puppeteer-core to handle both environments
-const getPuppeteer = async () => {
-  if (process.env.VERCEL) {
-    // Vercel production/serverless environment
-    const puppeteerCore = await import('puppeteer-core')
-    return puppeteerCore.default
-  } else {
-    // Local development - use regular puppeteer
-    const puppeteer = await import('puppeteer')
-    return puppeteer.default
-  }
-}
-
-// Get Chromium for Vercel environment
-const getChromium = async () => {
-  if (process.env.VERCEL) {
-    // @ts-ignore - @sparticuz/chromium doesn't have TypeScript definitions
-    const chromiumModule = await import('@sparticuz/chromium')
-    return chromiumModule.default
-  }
-  return null
-}
+import puppeteer, { Browser, Page } from 'puppeteer'
 
 /**
  * Extract content from a LinkedIn post URL
@@ -45,44 +22,18 @@ export async function extractLinkedInPostContent(postUrl: string): Promise<strin
   let browser: Browser | null = null
 
   try {
-    const puppeteer = await getPuppeteer()
-    const chromium = await getChromium()
-    
-    // Configure browser launch options based on environment
-    let launchOptions: any
-    
-    if (process.env.VERCEL && chromium) {
-      // Vercel/AWS Lambda configuration
-      launchOptions = {
-        args: [
-          ...chromium.args,
-          '--no-sandbox',
-          '--disable-setuid-sandbox',
-          '--disable-dev-shm-usage',
-          '--disable-accelerated-2d-canvas',
-          '--disable-gpu',
-        ],
-        defaultViewport: chromium.defaultViewport,
-        executablePath: await chromium.executablePath(),
-        headless: chromium.headless,
-      }
-    } else {
-      // Local development configuration
-      launchOptions = {
-        headless: true,
-        args: [
-          '--no-sandbox',
-          '--disable-setuid-sandbox',
-          '--disable-dev-shm-usage',
-          '--disable-accelerated-2d-canvas',
-          '--disable-gpu',
-          '--window-size=1920,1080',
-        ],
-      }
-    }
-
-    // Launch headless browser with environment-specific settings
-    browser = await puppeteer.launch(launchOptions)
+    // Launch headless browser with optimized settings
+    browser = await puppeteer.launch({
+      headless: true,
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-accelerated-2d-canvas',
+        '--disable-gpu',
+        '--window-size=1920,1080',
+      ],
+    })
 
     const page: Page = await browser.newPage()
 
