@@ -421,18 +421,61 @@ We maintain comprehensive documentation for developers and stakeholders:
 
 ## Deployment
 
-### Deploy to Vercel (Recommended)
+### Deploy to Google Cloud Platform (Recommended)
+
+**Best for**: Puppeteer-based scraping, reliable Chrome/Chromium support
+
+See **[DEPLOYMENT.md](./DEPLOYMENT.md)** for complete GCP deployment guide.
+
+**Quick Start - Cloud Run:**
+
+```bash
+# Install gcloud CLI and authenticate
+gcloud auth login
+
+# Deploy to Cloud Run
+gcloud run deploy linkedin-hashtag-engine \
+  --source . \
+  --platform managed \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --memory 2Gi \
+  --set-env-vars NEXTAUTH_SECRET=xxx,NEXTAUTH_URL=xxx,GEMINI_API_KEY=xxx
+```
+
+**Quick Start - Docker Local:**
+
+```bash
+# Build Docker image
+docker build -t linkedin-hashtag-engine .
+
+# Run locally
+docker run -p 3000:8080 \
+  -e NEXTAUTH_SECRET="your-secret" \
+  -e GEMINI_API_KEY="your-key" \
+  linkedin-hashtag-engine
+
+# Or use docker-compose
+docker-compose up
+```
+
+**Why Docker/GCP?**
+- ✅ **Reliable Puppeteer** - System Chrome/Chromium installation
+- ✅ **No Size Limits** - Unlike Vercel's 50MB serverless limit
+- ✅ **Better Performance** - Dedicated resources for scraping
+- ✅ **Cost Effective** - Cloud Run free tier: 2M requests/month
+- ✅ **Auto Scaling** - Scales to zero when not in use
+
+### Deploy to Vercel (Alternative)
+
+⚠️ **Note**: Vercel has 50MB serverless function limit. Puppeteer/Chromium may exceed this.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/saurav02022/linkedin-hashtag-refresh-engine)
 
-**Manual Deployment:**
-
-1. Push your code to GitHub
+1. Push code to GitHub
 2. Import project in [Vercel](https://vercel.com/new)
-3. Add environment variable: `GEMINI_API_KEY`
+3. Add environment variables (see `.env.example`)
 4. Deploy
-
-Your app will be live at your custom Vercel URL (e.g., `https://your-project.vercel.app`)
 
 ### Self-Hosting
 
@@ -445,7 +488,8 @@ npm start
 ```
 
 **Requirements:**
-- Node.js 18.18+
+- Node.js 20+
+- Chrome/Chromium installed (for Puppeteer)
 - Environment variables configured
 - HTTPS recommended for production
 

@@ -23,8 +23,10 @@ export async function extractLinkedInPostContent(postUrl: string): Promise<strin
 
   try {
     // Launch headless browser with optimized settings
+    // Docker container provides Chromium via PUPPETEER_EXECUTABLE_PATH env variable
     browser = await puppeteer.launch({
       headless: true,
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
