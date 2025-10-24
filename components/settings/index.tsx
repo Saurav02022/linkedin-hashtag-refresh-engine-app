@@ -27,7 +27,7 @@ export function SettingsScreen() {
         
         {/* Ad placement: Sidebar */}
         <div className="space-y-6">
-          <SidebarAd slot="6789012345" />
+          <SidebarAd slot="3011216889" />
         </div>
       </div>
     </div>

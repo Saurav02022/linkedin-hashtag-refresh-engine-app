@@ -76,7 +76,7 @@ export function PostsScreen() {
       </Card>
 
       {/* Ad placement 1: After stats, before form */}
-      <InContentAd slot="4567890123" />
+      <InContentAd slot="2932407402" />
 
       {/* Form */}
       <PostUrlForm onSubmit={handleGenerateHashtags} isLoading={isPending} />
@@ -94,7 +94,7 @@ export function PostsScreen() {
           <PostsList posts={posts} isLoading={isPending} />
           
           {/* Ad placement 2: After hashtag results */}
-          <InContentAd slot="5678901234" />
+          <InContentAd slot="8665640882" />
         </div>
       ) : !isPending && !error ? (
         <EmptyState

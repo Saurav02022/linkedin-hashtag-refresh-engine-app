@@ -130,7 +130,7 @@ function LoginContent() {
       {/* Ad placement: After How It Works */}
       <div className="flex justify-center">
         <div className="w-full max-w-3xl">
-          <InContentAd slot="3456789012" />
+          <InContentAd slot="7432450266" />
         </div>
       </div>
     </>

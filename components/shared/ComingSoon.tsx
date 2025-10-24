@@ -61,7 +61,7 @@ export function ComingSoon({ title, description }: ComingSoonProps) {
 
       {/* Ad placement: Below content */}
       <div className="w-full max-w-3xl mt-12">
-        <InContentAd slot="7890123456" />
+        <InContentAd slot="7352559211" />
       </div>
     </div>
   )
