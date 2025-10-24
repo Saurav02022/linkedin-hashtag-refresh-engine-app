@@ -5,7 +5,6 @@
 
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
-import Script from 'next/script'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { Toaster } from "@/components/ui/sonner"
 import { QueryProvider } from "@/lib/providers/QueryProvider"
@@ -53,13 +52,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <head>
-        {/* Google AdSense - Only load if ID is configured */}
+        {/* Google AdSense - Inject directly without Next.js Script wrapper */}
         {adsenseId && (
-          <Script
+          <script
             async
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
             crossOrigin="anonymous"
-            strategy="afterInteractive"
           />
         )}
       </head>
