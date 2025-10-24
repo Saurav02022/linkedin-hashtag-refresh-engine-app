@@ -1,37 +1,52 @@
 /**
  * In-Content Ad Component
- * Single Responsibility: Display horizontal ad between content sections
+ * Single Responsibility: Display Google AdSense in-content ads
  */
 
 'use client'
 
-import { AdUnit } from './AdUnit'
+import { useEffect } from 'react'
 
 interface InContentAdProps {
-  /**
-   * Ad slot ID from Google AdSense
-   */
   slot: string
-  
-  /**
-   * Additional CSS classes
-   */
-  className?: string
 }
 
-export function InContentAd({ slot, className = '' }: InContentAdProps) {
+export function InContentAd({ slot }: InContentAdProps) {
+  const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID
+
+  useEffect(() => {
+    // Only push ad if not already done
+    if (typeof window !== 'undefined' && window.adsbygoogle && adsenseId) {
+      try {
+        ;(window.adsbygoogle = window.adsbygoogle || []).push({})
+      } catch (error) {
+        console.error('AdSense error:', error)
+      }
+    }
+  }, [adsenseId])
+
+  // Don't render if AdSense is not configured
+  if (!adsenseId) {
+    return null
+  }
+
   return (
-    <div className={`w-full my-8 ${className}`}>
-      <p className="text-xs text-muted-foreground text-center mb-2">
-        Advertisement
-      </p>
-      <AdUnit 
-        slot={slot} 
-        format="auto" 
-        responsive={true}
-        className="min-h-[250px] flex items-center justify-center"
+    <div className="my-8 flex justify-center">
+      <ins
+        className="adsbygoogle"
+        style={{ display: 'block', textAlign: 'center' }}
+        data-ad-layout="in-article"
+        data-ad-format="fluid"
+        data-ad-client={adsenseId}
+        data-ad-slot={slot}
       />
     </div>
   )
 }
 
+// Declare window.adsbygoogle type
+declare global {
+  interface Window {
+    adsbygoogle: any[]
+  }
+}

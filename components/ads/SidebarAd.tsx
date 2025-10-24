@@ -1,39 +1,52 @@
 /**
  * Sidebar Ad Component
- * Single Responsibility: Display vertical ad in sidebar (desktop only)
+ * Single Responsibility: Display Google AdSense sidebar ads
  */
 
 'use client'
 
-import { AdUnit } from './AdUnit'
+import { useEffect } from 'react'
 
 interface SidebarAdProps {
-  /**
-   * Ad slot ID from Google AdSense
-   */
   slot: string
-  
-  /**
-   * Additional CSS classes
-   */
-  className?: string
 }
 
-export function SidebarAd({ slot, className = '' }: SidebarAdProps) {
+export function SidebarAd({ slot }: SidebarAdProps) {
+  const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID
+
+  useEffect(() => {
+    // Only push ad if not already done
+    if (typeof window !== 'undefined' && window.adsbygoogle && adsenseId) {
+      try {
+        ;(window.adsbygoogle = window.adsbygoogle || []).push({})
+      } catch (error) {
+        console.error('AdSense error:', error)
+      }
+    }
+  }, [adsenseId])
+
+  // Don't render if AdSense is not configured
+  if (!adsenseId) {
+    return null
+  }
+
   return (
-    <aside className={`hidden lg:block sticky top-20 ${className}`}>
-      <div className="w-full max-w-[300px]">
-        <p className="text-xs text-muted-foreground text-center mb-2">
-          Advertisement
-        </p>
-        <AdUnit 
-          slot={slot} 
-          format="vertical" 
-          responsive={true}
-          className="min-h-[600px]"
-        />
-      </div>
-    </aside>
+    <div className="my-4">
+      <ins
+        className="adsbygoogle"
+        style={{ display: 'block' }}
+        data-ad-client={adsenseId}
+        data-ad-slot={slot}
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      />
+    </div>
   )
 }
 
+// Declare window.adsbygoogle type
+declare global {
+  interface Window {
+    adsbygoogle: any[]
+  }
+}

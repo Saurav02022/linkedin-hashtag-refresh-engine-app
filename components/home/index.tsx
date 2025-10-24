@@ -12,6 +12,7 @@ import { Features } from './Features'
 import { HowItWorks } from './HowItWorks'
 import { PricingSection } from './PricingSection'
 import { CTA } from './CTA'
+import { InContentAd } from '@/components/ads'
 import { useAuth } from '@/lib/contexts/AuthContext'
 
 export function HomeScreen() {
@@ -23,7 +24,19 @@ export function HomeScreen() {
       <main className="flex-1">
         <HeroSection />
         <Features />
+        
+        {/* Ad placement 1: After Features section */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <InContentAd slot="REPLACE_WITH_YOUR_AD_SLOT_1" />
+        </div>
+        
         <HowItWorks />
+        
+        {/* Ad placement 2: After How It Works section */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <InContentAd slot="REPLACE_WITH_YOUR_AD_SLOT_2" />
+        </div>
+        
         <PricingSection />
         <CTA />
       </main>

@@ -1,8 +1,7 @@
 /**
- * Ad Components Barrel Export
+ * Ads Components Index
+ * Single Responsibility: Export all ad components
  */
 
-export { AdUnit } from './AdUnit'
-export { SidebarAd } from './SidebarAd'
 export { InContentAd } from './InContentAd'
-
+export { SidebarAd } from './SidebarAd'
