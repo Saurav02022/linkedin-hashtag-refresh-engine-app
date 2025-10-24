@@ -5,6 +5,8 @@
 
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
+import Script from 'next/script'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { Toaster } from "@/components/ui/sonner"
 import { QueryProvider } from "@/lib/providers/QueryProvider"
 import { AuthProvider } from "@/lib/providers/AuthProvider"
@@ -45,8 +47,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
+  const adsenseId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID
+
   return (
     <html lang="en" className={inter.className}>
+      <head>
+        {/* Google AdSense - Only load if ID is configured */}
+        {adsenseId && (
+          <Script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        )}
+      </head>
       <body className="antialiased min-h-screen bg-background">
         <AuthProvider>
           <QueryProvider>
@@ -54,6 +70,8 @@ export default function RootLayout({
             <Toaster position="top-right" />
           </QueryProvider>
         </AuthProvider>
+        {/* Google Analytics - Only load if ID is configured */}
+        {gaId && <GoogleAnalytics gaId={gaId} />}
       </body>
     </html>
   )

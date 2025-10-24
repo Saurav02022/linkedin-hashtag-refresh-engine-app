@@ -135,8 +135,8 @@ export function LoginScreen() {
       <AppHeader variant="public" />
       
       <main className="flex-1">
-        <div className="container mx-auto px-4 py-16">
-          <div className="space-y-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+          <div className="space-y-12">
             {/* Wrap LoginContent in Suspense for useSearchParams */}
             <Suspense fallback={
               <div className="space-y-16">
@@ -170,7 +170,7 @@ function Step({ number, title, description }: StepProps) {
         {number}
       </div>
       <h3 className="font-semibold">{title}</h3>
-      <p className="text-sm text-muted-foreground">{description}</p>
+      <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
     </div>
   )
 }

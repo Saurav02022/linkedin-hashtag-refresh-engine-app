@@ -24,7 +24,7 @@ export function AppFooter() {
               <span>Hashtag Engine</span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              AI-powered hashtag generation for LinkedIn creators.
+              100% Free AI-powered hashtag generation for LinkedIn creators.
             </p>
           </div>
 
@@ -33,18 +33,23 @@ export function AppFooter() {
             <Link href={`${ROUTES.HOME}#features`} className="hover:text-foreground transition-colors">
               Features
             </Link>
-            <Link href={ROUTES.PRICING} className="hover:text-foreground transition-colors">
-              Pricing
-            </Link>
-            <Link href={ROUTES.DASHBOARD} className="hover:text-foreground transition-colors">
-              Dashboard
+            <Link href={ROUTES.POSTS} className="hover:text-foreground transition-colors">
+              Generate Hashtags
             </Link>
             <Link href={ROUTES.PRIVACY} className="hover:text-foreground transition-colors">
-              Privacy
+              Privacy Policy
             </Link>
             <Link href={ROUTES.TERMS} className="hover:text-foreground transition-colors">
               Terms
             </Link>
+            <a 
+              href="https://optout.aboutads.info" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hover:text-foreground transition-colors"
+            >
+              Ad Choices
+            </a>
           </nav>
 
           {/* Social Links */}

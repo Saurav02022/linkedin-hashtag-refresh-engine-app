@@ -13,7 +13,7 @@ import { ROUTES } from '@/lib/routes'
 
 export function CTA() {
   return (
-    <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-primary/5">
+    <section className="py-16 sm:py-20 lg:py-24 bg-linear-to-br from-primary/5 via-background to-primary/5">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <Card className="max-w-4xl mx-auto p-8 sm:p-12 lg:p-16 text-center border-2 border-primary/20 bg-card/80 backdrop-blur">
           <div className="space-y-8">
@@ -22,7 +22,7 @@ export function CTA() {
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
                 Ready to Save Hours Every Week?
               </h2>
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                 Join content creators who are boosting their LinkedIn reach with AI-powered hashtags
               </p>
             </div>
@@ -59,7 +59,7 @@ function BenefitItem({ text }: { text: string }) {
   return (
     <div className="flex items-center gap-2">
       <div className="w-5 h-5 rounded-full bg-success/10 flex items-center justify-center">
-        <Check className="w-3 h-3 text-success" />
+        <Check className="w-3 h-3 text-success" aria-hidden="true" />
       </div>
       <span className="font-medium">{text}</span>
     </div>

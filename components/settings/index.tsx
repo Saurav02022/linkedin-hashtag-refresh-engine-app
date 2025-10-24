@@ -11,8 +11,8 @@ export function SettingsScreen() {
     <div className="space-y-8">
       {/* Header */}
       <div className="space-y-2">
-        <h1 className="text-4xl font-bold tracking-tight">Settings</h1>
-        <p className="text-lg text-muted-foreground">
+        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">Settings</h1>
+        <p className="text-base text-muted-foreground leading-relaxed">
           Manage your account and preferences
         </p>
       </div>

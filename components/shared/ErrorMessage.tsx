@@ -20,9 +20,9 @@ export function ErrorMessage({
 }: ErrorMessageProps) {
   return (
     <Alert variant="destructive" className="my-4">
-      <AlertCircle className="h-4 w-4" />
+      <AlertCircle className="h-4 w-4" aria-hidden="true" />
       <AlertTitle>{title}</AlertTitle>
-      <AlertDescription className="mt-2">
+      <AlertDescription className="mt-2 leading-relaxed">
         {message}
         {retry && (
           <Button 

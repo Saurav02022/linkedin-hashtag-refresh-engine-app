@@ -29,9 +29,9 @@ export function LoginForm({ onLogin }: LoginFormProps) {
 
     try {
       // Use NextAuth.js signIn function with LinkedIn provider
-      // Redirects to /dashboard on successful authentication
+      // Redirects to /posts (Generate Hashtags) on successful authentication
       await signIn('linkedin', { 
-        callbackUrl: '/dashboard',
+        callbackUrl: '/posts',
         redirect: true,
       })
     } catch (err) {
@@ -45,11 +45,11 @@ export function LoginForm({ onLogin }: LoginFormProps) {
     <Card className="w-full max-w-md">
       <CardHeader className="text-center space-y-4">
         <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
-          <Linkedin className="w-8 h-8 text-primary" />
+          <Linkedin className="w-8 h-8 text-primary" aria-hidden="true" />
         </div>
         <div>
           <CardTitle className="text-2xl">Connect Your LinkedIn Account</CardTitle>
-          <CardDescription className="mt-2">
+          <CardDescription className="mt-2 leading-relaxed">
             Secure authentication with LinkedIn to start generating hashtags
           </CardDescription>
         </div>
@@ -139,13 +139,13 @@ function PermissionItem({ icon: Icon, title, description }: PermissionItemProps)
   return (
     <div className="flex items-start gap-3">
       <div className="p-2 rounded-lg bg-success/10">
-        <Icon className="w-4 h-4 text-success" />
+        <Icon className="w-4 h-4 text-success" aria-hidden="true" />
       </div>
       <div className="flex-1 space-y-0.5">
         <p className="text-sm font-medium">{title}</p>
         <p className="text-xs text-muted-foreground">{description}</p>
       </div>
-      <CheckCircle2 className="w-4 h-4 text-success mt-2" />
+      <CheckCircle2 className="w-4 h-4 text-success mt-2" aria-hidden="true" />
     </div>
   )
 }

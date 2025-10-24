@@ -7,7 +7,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Hash, Settings, Home, Menu, X, CreditCard, LogOut } from 'lucide-react'
+import { Hash, Settings, Home, Menu, X, LogOut } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -63,11 +63,8 @@ export function AppHeader({ variant = 'public' }: AppHeaderProps) {
             {/* Navigation - Authenticated */}
             {variant === 'authenticated' && (
               <nav className="hidden md:flex items-center gap-1">
-                <NavLink href={ROUTES.DASHBOARD} icon={Home} active={pathname === ROUTES.DASHBOARD}>
-                  Dashboard
-                </NavLink>
                 <NavLink href={ROUTES.POSTS} icon={Hash} active={pathname === ROUTES.POSTS}>
-                  Generate
+                  Generate Hashtags
                 </NavLink>
               </nav>
             )}
@@ -86,12 +83,6 @@ export function AppHeader({ variant = 'public' }: AppHeaderProps) {
                   className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                 >
                   How It Works
-                </Link>
-                <Link 
-                  href={ROUTES.PRICING} 
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Pricing
                 </Link>
               </nav>
             )}
@@ -146,12 +137,6 @@ export function AppHeader({ variant = 'public' }: AppHeaderProps) {
                       Settings
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href={ROUTES.SETTINGS_BILLING} className="cursor-pointer">
-                      <CreditCard className="w-4 h-4 mr-2" />
-                      Billing
-                    </Link>
-                  </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem 
                     className="text-destructive cursor-pointer"
@@ -193,17 +178,11 @@ export function AppHeader({ variant = 'public' }: AppHeaderProps) {
         {variant === 'authenticated' && mobileMenuOpen && (
           <div className="md:hidden py-4 border-t">
             <nav className="flex flex-col space-y-1">
-              <MobileNavLink href={ROUTES.DASHBOARD} active={pathname === ROUTES.DASHBOARD}>
-                Dashboard
-              </MobileNavLink>
               <MobileNavLink href={ROUTES.POSTS} active={pathname === ROUTES.POSTS}>
-                Generate
+                Generate Hashtags
               </MobileNavLink>
               <MobileNavLink href={ROUTES.SETTINGS} active={pathname === ROUTES.SETTINGS}>
                 Settings
-              </MobileNavLink>
-              <MobileNavLink href={ROUTES.SETTINGS_BILLING} active={pathname === ROUTES.SETTINGS_BILLING}>
-                Billing
               </MobileNavLink>
             </nav>
           </div>

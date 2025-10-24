@@ -14,143 +14,107 @@ import { ROUTES } from '@/lib/routes'
 
 export function PricingSection() {
   return (
-    <section id="pricing" className="py-20 px-4 bg-muted/30">
-      <div className="container mx-auto max-w-7xl">
+    <section id="pricing" className="py-16 sm:py-20 lg:py-24 bg-muted/30">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <Badge className="mb-4">Pricing</Badge>
+        <div className="text-center mb-12">
+          <Badge className="mb-4 bg-success/10 text-success border-success">100% Free</Badge>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-            Simple, Affordable Pricing
+            Free Forever. No Catch.
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Start free and scale as you grow. No hidden fees, cancel anytime.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            All features included. No paywalls, no limits, no credit card required.
           </p>
         </div>
 
-        {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
-          {/* Free Plan */}
-          <Card className="flex flex-col">
-            <CardHeader>
-              <CardTitle className="text-2xl">Free</CardTitle>
-              <CardDescription>Perfect for trying out</CardDescription>
-              <div className="mt-4">
-                <span className="text-5xl font-bold">$0</span>
-                <span className="text-muted-foreground">/forever</span>
-              </div>
-            </CardHeader>
-            <CardContent className="flex-1">
-              <ul className="space-y-3">
-                <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                  <span className="text-sm">10 generations/month</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                  <span className="text-sm">Basic AI suggestions</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                  <span className="text-sm">Copy to clipboard</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                  <span className="text-sm">Email support</span>
-                </li>
-              </ul>
-            </CardContent>
-            <CardFooter>
-              <Button variant="outline" className="w-full" asChild>
-                <Link href={ROUTES.LOGIN}>Start Free</Link>
-              </Button>
-            </CardFooter>
-          </Card>
-
-          {/* Pro Plan - Most Popular */}
-          <Card className="flex flex-col relative border-primary shadow-lg scale-105">
+        {/* Single Free Plan Card */}
+        <div className="max-w-2xl mx-auto mb-12">
+          <Card className="flex flex-col border-2 border-success shadow-lg">
             <div className="absolute -top-4 left-0 right-0 flex justify-center">
-              <Badge className="bg-primary text-primary-foreground">Most Popular</Badge>
+              <Badge className="bg-success text-success-foreground">Supported by Ads</Badge>
             </div>
-            <CardHeader>
-              <CardTitle className="text-2xl">Pro</CardTitle>
-              <CardDescription>Everything you need to grow</CardDescription>
-              <div className="mt-4">
-                <span className="text-5xl font-bold">$9</span>
-                <span className="text-muted-foreground">/month</span>
+            <CardHeader className="text-center pt-8">
+              <CardTitle className="text-3xl">Free Forever</CardTitle>
+              <CardDescription className="text-lg">All features. Unlimited use.</CardDescription>
+              <div className="mt-6">
+                <span className="text-6xl font-bold">$0</span>
+                <span className="text-muted-foreground text-xl">/forever</span>
               </div>
             </CardHeader>
             <CardContent className="flex-1">
-              <ul className="space-y-3">
-                <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                  <span className="text-sm font-medium">Unlimited generations</span>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <Check className="w-6 h-6 text-success shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-base font-medium">Unlimited Generations</span>
+                    <p className="text-sm text-muted-foreground">Generate as many hashtags as you need</p>
+                  </div>
                 </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                  <span className="text-sm">Advanced AI suggestions</span>
+                <li className="flex items-start gap-3">
+                  <Check className="w-6 h-6 text-success shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-base font-medium">AI-Powered Analysis</span>
+                    <p className="text-sm text-muted-foreground">Google Gemini 2.5 Flash for best results</p>
+                  </div>
                 </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                  <span className="text-sm">Priority generation speed</span>
+                <li className="flex items-start gap-3">
+                  <Check className="w-6 h-6 text-success shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-base font-medium">3 Strategic Batches</span>
+                    <p className="text-sm text-muted-foreground">Maximum Reach, Viral Potential, Niche Engagement</p>
+                  </div>
                 </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                  <span className="text-sm">Hashtag analytics & insights</span>
+                <li className="flex items-start gap-3">
+                  <Check className="w-6 h-6 text-success shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-base font-medium">One-Click Posting</span>
+                    <p className="text-sm text-muted-foreground">Post directly to LinkedIn as comments</p>
+                  </div>
                 </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                  <span className="text-sm">Unlimited bulk processing</span>
+                <li className="flex items-start gap-3">
+                  <Check className="w-6 h-6 text-success shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-base font-medium">Fully Customizable</span>
+                    <p className="text-sm text-muted-foreground">Add, remove, or mix hashtags before posting</p>
+                  </div>
                 </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                  <span className="text-sm">Team collaboration (3 users)</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                  <span className="text-sm">Custom templates</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                  <span className="text-sm">Priority email support</span>
+                <li className="flex items-start gap-3">
+                  <Check className="w-6 h-6 text-success shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-base font-medium">Lightning Fast</span>
+                    <p className="text-sm text-muted-foreground">2-3 second generation time</p>
+                  </div>
                 </li>
               </ul>
             </CardContent>
             <CardFooter>
-              <Button className="w-full" asChild>
-                <Link href={`${ROUTES.LOGIN}?plan=pro`}>Start Pro Trial</Link>
+              <Button size="lg" className="w-full" asChild>
+                <Link href={ROUTES.LOGIN}>
+                  Start Generating Hashtags
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Link>
               </Button>
             </CardFooter>
           </Card>
-        </div>
-
-        {/* CTA to Full Pricing */}
-        <div className="text-center">
-          <Link
-            href={ROUTES.PRICING}
-            className="inline-flex items-center gap-2 text-primary hover:underline font-medium"
-          >
-            View detailed pricing comparison
-            <ArrowRight className="w-4 h-4" />
-          </Link>
         </div>
 
         {/* Trust Badges */}
         <div className="mt-12 pt-8 border-t text-center">
           <p className="text-sm text-muted-foreground mb-4">
-            All plans include
+            Why is it free?
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-primary" />
-              <span>14-day money-back guarantee</span>
+              <Check className="w-4 h-4 text-success" />
+              <span>Supported by non-intrusive ads</span>
             </div>
             <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-primary" />
-              <span>No credit card required for free</span>
+              <Check className="w-4 h-4 text-success" />
+              <span>No credit card required</span>
             </div>
             <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-primary" />
-              <span>Cancel anytime</span>
+              <Check className="w-4 h-4 text-success" />
+              <span>All features included</span>
             </div>
           </div>
         </div>

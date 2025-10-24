@@ -3,53 +3,52 @@
  * Single Responsibility: Display product features
  */
 
-import { Sparkles, Zap, TrendingUp, Shield, Clock, Copy, RefreshCw, Calendar } from 'lucide-react'
+import { Sparkles, Zap, Target, Send, Edit3, Shield } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 const features = [
   {
-    icon: RefreshCw,
-    title: 'Auto-Refresh Hashtags',
-    description: 'Set it and forget it! Automatically refresh hashtags every 24-168 hours to maintain peak engagement on evergreen content.',
-    highlight: true,
-  },
-  {
     icon: Sparkles,
-    title: 'AI-Powered Generation',
-    description: 'Google Gemini analyzes your content and generates relevant, trending hashtags tailored to your niche.',
+    title: 'AI-Powered Analysis',
+    description: 'Google Gemini 2.5 Flash analyzes your content and generates 10-12 relevant, trending hashtags instantly.',
   },
   {
     icon: Zap,
     title: 'Lightning Fast',
-    description: 'Get 10-12 professionally selected hashtags in just 2-3 seconds. No more manual research.',
+    description: 'Get professional hashtag recommendations in 2-3 seconds. No more 20-minute research sessions.',
   },
   {
-    icon: Calendar,
-    title: 'Smart Scheduling',
-    description: 'Choose your refresh interval: every 24h, 48h (recommended), 72h, weekly, or set a custom schedule.',
+    icon: Target,
+    title: '3 Strategic Batches',
+    description: 'Choose from Maximum Reach, Viral Potential, or Niche Engagement strategies—each optimized for different goals.',
   },
   {
-    icon: TrendingUp,
-    title: 'Maintain Engagement',
-    description: 'Keep your old posts visible as hashtags lose 80% effectiveness after 48 hours. Fresh tags = sustained reach.',
+    icon: Send,
+    title: 'One-Click Posting',
+    description: 'Post hashtags directly to LinkedIn as comments with a single click. No copy-paste needed.',
   },
   {
-    icon: Clock,
-    title: 'Save Hours Weekly',
-    description: 'Eliminate manual hashtag research and updates. Focus on creating great content instead.',
+    icon: Edit3,
+    title: 'Fully Customizable',
+    description: 'Add, remove, or mix hashtags from different batches. Complete control before posting.',
+  },
+  {
+    icon: Shield,
+    title: 'Simple & Reliable',
+    description: 'Manual content input ensures 100% reliability. No scraping failures or complex setup required.',
   },
 ]
 
 export function Features() {
   return (
-    <section id="features" className="py-20 bg-muted/30">
+    <section id="features" className="py-16 sm:py-20 lg:py-24 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
             Everything You Need
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-lg text-muted-foreground leading-relaxed">
             Powerful features designed to save time and boost your LinkedIn presence
           </p>
         </div>
@@ -72,26 +71,15 @@ interface FeatureCardProps {
   highlight?: boolean
 }
 
-function FeatureCard({ icon: Icon, title, description, highlight }: FeatureCardProps) {
+function FeatureCard({ icon: Icon, title, description }: FeatureCardProps) {
   return (
-    <Card className={`border-2 hover:shadow-lg transition-all duration-300 ${
-      highlight 
-        ? 'border-primary bg-primary/5 hover:border-primary' 
-        : 'hover:border-primary/50'
-    }`}>
+    <Card className="h-full border-2 hover:shadow-lg hover:border-primary/50 transition-all duration-300">
       <CardHeader>
-        <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${
-          highlight ? 'bg-primary text-primary-foreground' : 'bg-primary/10'
-        }`}>
-          <Icon className={`w-6 h-6 ${highlight ? '' : 'text-primary'}`} />
+        <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-primary/10">
+          <Icon className="w-6 h-6 text-primary" aria-hidden="true" />
         </div>
-        <CardTitle className="text-xl flex items-center gap-2">
+        <CardTitle className="text-xl">
           {title}
-          {highlight && (
-            <span className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded-full">
-              Pro
-            </span>
-          )}
         </CardTitle>
       </CardHeader>
       <CardContent>

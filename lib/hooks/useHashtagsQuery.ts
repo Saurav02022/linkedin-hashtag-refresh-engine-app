@@ -8,7 +8,8 @@ import { API_ENDPOINTS } from '@/lib/api-routes'
 import type { HashtagGenerationResponse } from '@/types'
 
 interface GenerateHashtagsRequest {
-  urls: string[]
+  content: string
+  url?: string
 }
 
 interface GenerateHashtagsResponse {

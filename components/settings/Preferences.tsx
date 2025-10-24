@@ -17,7 +17,7 @@ export function Preferences() {
     <Card>
       <CardHeader>
         <CardTitle>Preferences</CardTitle>
-        <CardDescription>
+        <CardDescription className="leading-relaxed">
           Customize your hashtag generation settings
         </CardDescription>
       </CardHeader>
@@ -33,7 +33,7 @@ export function Preferences() {
             defaultValue="12"
             className="w-32"
           />
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground leading-relaxed">
             Number of hashtags to generate (5-15)
           </p>
         </div>

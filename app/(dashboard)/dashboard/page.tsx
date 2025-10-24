@@ -1,11 +1,12 @@
 /**
- * Dashboard Page
- * Single Responsibility: Main dashboard view
+ * Dashboard Page - Redirects to Posts
+ * Single Responsibility: Redirect to main generation page
  */
 
-import { DashboardScreen } from '@/components/dashboard'
+import { redirect } from 'next/navigation'
+import { ROUTES } from '@/lib/routes'
 
 export default function DashboardPage() {
-  return <DashboardScreen />
+  redirect(ROUTES.POSTS)
 }
 

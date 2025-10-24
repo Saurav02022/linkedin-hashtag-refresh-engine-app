@@ -55,7 +55,7 @@ export function ConnectionStatus() {
     <Card>
       <CardHeader>
         <CardTitle>LinkedIn Connection</CardTitle>
-        <CardDescription>
+        <CardDescription className="leading-relaxed">
           Manage your LinkedIn account connection
         </CardDescription>
       </CardHeader>
@@ -64,7 +64,7 @@ export function ConnectionStatus() {
         <div className="flex items-center justify-between p-4 rounded-lg border">
           <div className="flex items-center gap-3">
             <div className={`p-2 rounded-lg ${isAuthenticated ? 'bg-success/10' : 'bg-muted'}`}>
-              <Linkedin className={`w-5 h-5 ${isAuthenticated ? 'text-success' : 'text-muted-foreground'}`} />
+              <Linkedin className={`w-5 h-5 ${isAuthenticated ? 'text-success' : 'text-muted-foreground'}`} aria-hidden="true" />
             </div>
             <div>
               <p className="font-medium">
@@ -78,9 +78,9 @@ export function ConnectionStatus() {
             </div>
           </div>
           {isAuthenticated ? (
-            <CheckCircle2 className="w-5 h-5 text-success" />
+            <CheckCircle2 className="w-5 h-5 text-success" aria-hidden="true" />
           ) : (
-            <XCircle className="w-5 h-5 text-muted-foreground" />
+            <XCircle className="w-5 h-5 text-muted-foreground" aria-hidden="true" />
           )}
         </div>
 
@@ -89,14 +89,14 @@ export function ConnectionStatus() {
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button variant="destructive" disabled={isLoading}>
-                {isLoading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+                {isLoading && <Loader2 className="w-4 h-4 mr-2 animate-spin" aria-hidden="true" />}
                 Disconnect Account
               </Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
                 <AlertDialogTitle>Disconnect LinkedIn Account?</AlertDialogTitle>
-                <AlertDialogDescription>
+                <AlertDialogDescription className="leading-relaxed">
                   This will remove your LinkedIn connection and you'll need to reconnect 
                   to generate hashtags. Your data will be preserved.
                 </AlertDialogDescription>
@@ -116,12 +116,12 @@ export function ConnectionStatus() {
           <Button onClick={handleConnect} disabled={isLoading}>
             {isLoading ? (
               <>
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" aria-hidden="true" />
                 Connecting...
               </>
             ) : (
               <>
-                <Linkedin className="w-4 h-4 mr-2" />
+                <Linkedin className="w-4 h-4 mr-2" aria-hidden="true" />
                 Connect LinkedIn
               </>
             )}
