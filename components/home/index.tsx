@@ -27,14 +27,14 @@ export function HomeScreen() {
         
         {/* Ad placement 1: After Features section */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <InContentAd slot="REPLACE_WITH_YOUR_AD_SLOT_1" />
+          <InContentAd slot="8795108171" />
         </div>
         
         <HowItWorks />
         
         {/* Ad placement 2: After How It Works section */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <InContentAd slot="REPLACE_WITH_YOUR_AD_SLOT_2" />
+          <InContentAd slot="9613365825" />
         </div>
         
         <PricingSection />
