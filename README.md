@@ -56,18 +56,18 @@ Open [http://localhost:3000](http://localhost:3000)
 
 Required variables for `.env.local`:
 
-```bash
+   ```bash
 # LinkedIn OAuth (https://www.linkedin.com/developers/)
 LINKEDIN_CLIENT_ID=your_client_id
 LINKEDIN_CLIENT_SECRET=your_client_secret
-
-# NextAuth Configuration
-NEXTAUTH_URL=http://localhost:3000
+   
+   # NextAuth Configuration
+   NEXTAUTH_URL=http://localhost:3000
 NEXTAUTH_SECRET=your_secret_here  # openssl rand -base64 32
-
+   
 # Google Gemini API (https://makersuite.google.com/app/apikey)
-GEMINI_API_KEY=your_gemini_api_key
-```
+   GEMINI_API_KEY=your_gemini_api_key
+   ```
 
 Optional (Phase 3 & 4):
 ```bash
@@ -142,10 +142,10 @@ linkedin-hashtag-refresh-engine/
 
 ## Documentation
 
+- **[SYSTEM_DESIGN.md](SYSTEM_DESIGN.md)** - Complete system architecture and design
 - **[PRD.md](PRD.md)** - Product Requirements Document
 - **[DESIGN_SYSTEM.md](DESIGN_SYSTEM.md)** - Design system and UI guidelines
 - **[ADSENSE_SETUP.md](ADSENSE_SETUP.md)** - Google AdSense integration guide
-- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Deployment instructions (if exists)
 
 ## Contributing
 
