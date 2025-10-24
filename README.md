@@ -128,6 +128,7 @@ linkedin-hashtag-refresh-engine/
 │   └── layout.tsx         # Root layout
 ├── components/            # React components
 │   ├── ui/               # UI primitives (shadcn)
+│   ├── ads/              # AdSense components
 │   ├── home/             # Home page sections
 │   ├── posts/            # Hashtag generation
 │   └── shared/           # Shared components
@@ -138,6 +139,13 @@ linkedin-hashtag-refresh-engine/
 │   └── validations/      # Zod schemas
 └── types/                 # TypeScript types
 ```
+
+## Documentation
+
+- **[PRD.md](PRD.md)** - Product Requirements Document
+- **[DESIGN_SYSTEM.md](DESIGN_SYSTEM.md)** - Design system and UI guidelines
+- **[ADSENSE_SETUP.md](ADSENSE_SETUP.md)** - Google AdSense integration guide
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Deployment instructions (if exists)
 
 ## Contributing
 

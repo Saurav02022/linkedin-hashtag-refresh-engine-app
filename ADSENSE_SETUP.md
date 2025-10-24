@@ -124,6 +124,100 @@ NEXT_PUBLIC_ADSENSE_CLIENT_ID=ca-pub-6731044537367330
 
 ---
 
+## 🐛 Troubleshooting
+
+### Common Issues & Solutions
+
+#### Issue 1: "No slot size for availableWidth=0" ✅ FIXED
+**Error:**
+```
+AdSense error: TagError: adsbygoogle.push() error: No slot size for availableWidth=0
+```
+
+**Solution:** ✅ **Already fixed in production!**
+- Ad containers now have proper dimensions (`minHeight: 280px`)
+- Full width classes applied (`w-full`)
+- Auto format with responsive sizing enabled
+
+**If you still see this:**
+1. Hard refresh: Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac)
+2. Clear browser cache
+3. Wait for deployment to complete (5 minutes)
+
+---
+
+#### Issue 2: "Video element not found for attaching listeners"
+**Warning:**
+```
+content.js:1454 Video element not found for attaching listeners.
+```
+
+**Solution:** ✅ **Ignore this - it's harmless!**
+- This is from a **browser extension**, not your code
+- Common with ad blockers, video downloaders, or YouTube extensions
+- Does NOT affect AdSense functionality
+- Test in incognito mode to avoid extension interference
+
+---
+
+#### Issue 3: "requestIdleCallback handler took Xms"
+**Warning:**
+```
+[Violation] 'requestIdleCallback' handler took 109ms
+```
+
+**Solution:** ✅ **Ignore this - it's just a performance suggestion!**
+- This is a browser performance warning, not an error
+- Often from browser extensions
+- 109ms is acceptable performance
+- Does NOT affect AdSense or revenue
+
+---
+
+#### Issue 4: Blank Ad Spaces (No Ads Showing)
+**Symptom:** Ad containers visible but no ads appear
+
+**Solution:** ⏳ **Wait 24-48 hours - this is normal!**
+- AdSense needs time to review your site
+- Blank spaces = containers working correctly
+- Google is analyzing content and matching advertisers
+- First ads typically appear within 24-48 hours
+
+**Check:**
+1. No console errors? ✅ Setup is correct
+2. Ad containers have dimensions? ✅ Technical setup good
+3. AdSense account approved? ✅ Just needs time
+4. Test in incognito mode? ✅ Avoid extension interference
+
+---
+
+#### Issue 5: Some Ads Show, Others Don't
+**Symptom:** Inconsistent ad serving across pages
+
+**Solution:** ✅ **Normal during first week!**
+- AdSense gradually ramps up ad serving
+- Different pages get ads at different times
+- Takes 3-7 days for consistent delivery
+- Higher traffic pages get ads first
+
+---
+
+### When to Contact Support
+
+**Contact AdSense Support if:**
+- ❌ Still see "No slot size" error after 24 hours
+- ❌ AdSense account shows policy violations
+- ❌ No ads after 7 days (with traffic > 100 visits/day)
+- ❌ RPM consistently < $0.50 (after 2 weeks of serving)
+
+**DON'T contact support for:**
+- ✅ Extension warnings in console (normal)
+- ✅ Blank spaces in first 48 hours (expected)
+- ✅ Inconsistent serving in first week (normal)
+- ✅ Low earnings with low traffic (expected)
+
+---
+
 ## 📊 Monitoring & Optimization
 
 ### Track Performance
@@ -222,6 +316,31 @@ git push origin main
 ---
 
 **Last Updated:** October 24, 2025  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** ✅ All ads LIVE - Revenue generation active!
+
+---
+
+## 📝 Changelog
+
+### Version 1.1 - October 24, 2025
+**🐛 Bug Fix: AdSense Container Dimensions**
+- Fixed "No slot size for availableWidth=0" error
+- Added proper dimensions to ad containers (`minHeight: 280px`)
+- Changed from `fluid` to `auto` format with responsive sizing
+- Added `w-full` classes for guaranteed width
+- Added troubleshooting section to documentation
+
+**Components Updated:**
+- `components/ads/InContentAd.tsx` - Added dimensions and width classes
+- `components/ads/SidebarAd.tsx` - Added minimum dimensions
+
+**Result:** ✅ All ads now load without errors
+
+### Version 1.0 - October 24, 2025
+**🚀 Initial AdSense Integration**
+- Created 7 strategic ad placements across all pages
+- Integrated InContentAd and SidebarAd components
+- Configured all ad slot IDs
+- Deployed to production
 
