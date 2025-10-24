@@ -3,7 +3,6 @@
 **AI-powered hashtag generation for LinkedIn posts in 2-3 seconds**
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/saurav02022/linkedin-hashtag-refresh-engine)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 [Live Demo](https://ai-linkedin-hashtag-refresh-engine-app.vercel.app) · [Report Bug](https://github.com/saurav02022/linkedin-hashtag-refresh-engine/issues) · [Request Feature](https://github.com/saurav02022/linkedin-hashtag-refresh-engine/issues)
 
@@ -149,10 +148,6 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guid
 3. Commit your changes (`git commit -m 'Add some amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
-
-## License
-
-MIT License - see [LICENSE](LICENSE) for details.
 
 ## Support
 
