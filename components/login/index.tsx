@@ -14,6 +14,7 @@ import { AlertCircle } from 'lucide-react'
 import { AppHeader } from '@/components/shared/AppHeader'
 import { AppFooter } from '@/components/shared/AppFooter'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { InContentAd } from '@/components/ads'
 import { HeroSection } from './HeroSection'
 import { LoginForm } from './LoginForm'
 import { ROUTES } from '@/lib/routes'
@@ -123,6 +124,13 @@ function LoginContent() {
           <Step number={1} title="Connect" description="Securely connect your LinkedIn account" />
           <Step number={2} title="Paste URL" description="Add your LinkedIn post URLs" />
           <Step number={3} title="Generate" description="Get AI-powered hashtags instantly" />
+        </div>
+      </div>
+
+      {/* Ad placement: After How It Works */}
+      <div className="flex justify-center">
+        <div className="w-full max-w-3xl">
+          <InContentAd slot="3456789012" />
         </div>
       </div>
     </>

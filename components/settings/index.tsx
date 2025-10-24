@@ -3,6 +3,7 @@
  * Single Responsibility: Settings and preferences page
  */
 
+import { SidebarAd } from '@/components/ads'
 import { ConnectionStatus } from './ConnectionStatus'
 import { Preferences } from './Preferences'
 
@@ -17,10 +18,17 @@ export function SettingsScreen() {
         </p>
       </div>
 
-      {/* Settings Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <ConnectionStatus />
-        <Preferences />
+      {/* Settings Grid with Ad */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2 space-y-6">
+          <ConnectionStatus />
+          <Preferences />
+        </div>
+        
+        {/* Ad placement: Sidebar */}
+        <div className="space-y-6">
+          <SidebarAd slot="6789012345" />
+        </div>
       </div>
     </div>
   )

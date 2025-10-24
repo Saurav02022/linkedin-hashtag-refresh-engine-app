@@ -5,6 +5,7 @@
 
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { InContentAd } from '@/components/ads'
 import { ArrowLeft, Clock } from 'lucide-react'
 
 interface ComingSoonProps {
@@ -57,6 +58,11 @@ export function ComingSoon({ title, description }: ComingSoonProps) {
           LinkedIn
         </a>
       </p>
+
+      {/* Ad placement: Below content */}
+      <div className="w-full max-w-3xl mt-12">
+        <InContentAd slot="7890123456" />
+      </div>
     </div>
   )
 }

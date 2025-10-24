@@ -9,6 +9,7 @@ import { FileText, Hash, Sparkles } from 'lucide-react'
 import { PostUrlForm } from './PostUrlForm'
 import { PostsList } from './PostsList'
 import { EmptyState, ErrorMessage } from '@/components/shared'
+import { InContentAd } from '@/components/ads'
 import { useGenerateHashtags } from '@/lib/hooks'
 import { Card, CardContent } from '@/components/ui/card'
 import type { PostFormInput } from '@/lib/validations'
@@ -74,6 +75,9 @@ export function PostsScreen() {
         </CardContent>
       </Card>
 
+      {/* Ad placement 1: After stats, before form */}
+      <InContentAd slot="4567890123" />
+
       {/* Form */}
       <PostUrlForm onSubmit={handleGenerateHashtags} isLoading={isPending} />
 
@@ -88,6 +92,9 @@ export function PostsScreen() {
             <h2 className="text-2xl font-semibold">Your Hashtags</h2>
           </div>
           <PostsList posts={posts} isLoading={isPending} />
+          
+          {/* Ad placement 2: After hashtag results */}
+          <InContentAd slot="5678901234" />
         </div>
       ) : !isPending && !error ? (
         <EmptyState
