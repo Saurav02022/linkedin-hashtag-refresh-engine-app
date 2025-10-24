@@ -31,10 +31,10 @@ export function SidebarAd({ slot }: SidebarAdProps) {
   }
 
   return (
-    <div className="my-4">
+    <div className="my-4 w-full">
       <ins
         className="adsbygoogle"
-        style={{ display: 'block' }}
+        style={{ display: 'block', minHeight: '280px', minWidth: '250px' }}
         data-ad-client={adsenseId}
         data-ad-slot={slot}
         data-ad-format="auto"

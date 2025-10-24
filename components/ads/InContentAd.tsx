@@ -31,15 +31,17 @@ export function InContentAd({ slot }: InContentAdProps) {
   }
 
   return (
-    <div className="my-8 flex justify-center">
-      <ins
-        className="adsbygoogle"
-        style={{ display: 'block', textAlign: 'center' }}
-        data-ad-layout="in-article"
-        data-ad-format="fluid"
-        data-ad-client={adsenseId}
-        data-ad-slot={slot}
-      />
+    <div className="my-8 w-full flex justify-center">
+      <div className="w-full max-w-7xl">
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block', minHeight: '280px' }}
+          data-ad-client={adsenseId}
+          data-ad-slot={slot}
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
+      </div>
     </div>
   )
 }
