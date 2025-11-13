@@ -1,11 +1,21 @@
 /**
  * Coming Soon Component
  * Single Responsibility: Display coming soon message for unimplemented pages
+ * 
+ * AdSense Policy Compliance:
+ * - NO ADS should be placed on "Coming Soon" pages
+ * - These are considered "under construction" pages with low-value content
+ * - Only add ads after implementing substantial, valuable content
+ * 
+ * Before adding ads to any page, ensure it has:
+ * 1. Original, substantial content (500+ words recommended)
+ * 2. Clear value proposition for users
+ * 3. Proper navigation and structure
+ * 4. Not under construction or placeholder content
  */
 
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { InContentAd } from '@/components/ads'
 import { ArrowLeft, Clock } from 'lucide-react'
 
 interface ComingSoonProps {
@@ -59,10 +69,11 @@ export function ComingSoon({ title, description }: ComingSoonProps) {
         </a>
       </p>
 
-      {/* Ad placement: Below content */}
-      <div className="w-full max-w-3xl mt-12">
-        <InContentAd slot="7352559211" />
-      </div>
+      {/* 
+        AdSense Compliance: NO ADS on Coming Soon pages
+        Ads removed to comply with Google Publisher Policies
+        Only add ads back after implementing real, substantial content
+      */}
     </div>
   )
 }
