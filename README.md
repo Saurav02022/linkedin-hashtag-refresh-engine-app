@@ -14,12 +14,12 @@ Paste a LinkedIn post, get three strategy-specific hashtag sets from Gemini, sig
 4. [Authentication & the 60-day token](#authentication--the-60-day-token)
 5. [Hashtag generation](#hashtag-generation)
 6. [Posting the comment](#posting-the-comment)
-7. [Invariants](#invariants)
+7. [Invariants the system holds](#invariants-the-system-holds)
 8. [Design decisions (and the alternatives I turned down)](#design-decisions-and-the-alternatives-i-turned-down)
 9. [API surface & error model](#api-surface--error-model)
 10. [Observability & delivery](#observability--delivery)
-11. [Run it locally](#run-it-locally)
-12. [Tests & known limitations](#tests--known-limitations)
+11. [Tests & known limitations](#tests--known-limitations)
+12. [Run it locally](#run-it-locally)
 13. [Tech stack](#tech-stack)
 
 ---
@@ -138,7 +138,7 @@ The access token comes from `getServerSession` on the server — it's never expo
 
 ---
 
-## Invariants
+## Invariants the system holds
 
 These hold no matter what the model returns or how LinkedIn responds:
 
@@ -194,6 +194,19 @@ Input is validated with **Zod at the boundary** — `content` must be ≥ 10 cha
 
 ---
 
+## Tests & known limitations
+
+**No automated tests yet.** For a portfolio build I prioritised a working end-to-end flow. The first coverage I'd add, in order: unit tests around `parseBatches`/`validateHashtags` (pure functions with clear edge cases — malformed model JSON, the array fallback, spam filtering, the 12-cap), then the token-refresh branch, since those are the parts most likely to break silently.
+
+Other honest trade-offs:
+
+- **No app-level rate limiting.** Generation is open; a real deployment needs a per-user limiter in front of the Gemini call.
+- **Stateless by design** — no post/hashtag history, because there's no database.
+- **Leftover Puppeteer plumbing** in the Dockerfile and `next.config.ts` from the abandoned scraper (see [design decisions](#design-decisions-and-the-alternatives-i-turned-down)) — dead weight to remove.
+- **Write-only LinkedIn scope** — the app can post a comment but can't confirm, read, or delete it afterward.
+
+---
+
 ## Run it locally
 
 Under ten minutes: needs Node and a LinkedIn dev app plus a Gemini key.
@@ -215,19 +228,6 @@ GEMINI_API_KEY=…               # makersuite.google.com/app/apikey
 ```
 
 Sentry (`SENTRY_DSN`) and analytics are optional. `.env.local` is git-ignored; the Gemini key is read server-side only. In the LinkedIn app, request the *Sign In with LinkedIn* and *Share on LinkedIn* products and add `http://localhost:3000/api/auth/callback/linkedin` as a redirect URL.
-
----
-
-## Tests & known limitations
-
-**No automated tests yet.** For a portfolio build I prioritised a working end-to-end flow. The first coverage I'd add, in order: unit tests around `parseBatches`/`validateHashtags` (pure functions with clear edge cases — malformed model JSON, the array fallback, spam filtering, the 12-cap), then the token-refresh branch, since those are the parts most likely to break silently.
-
-Other honest trade-offs:
-
-- **No app-level rate limiting.** Generation is open; a real deployment needs a per-user limiter in front of the Gemini call.
-- **Stateless by design** — no post/hashtag history, because there's no database.
-- **Leftover Puppeteer plumbing** in the Dockerfile and `next.config.ts` from the abandoned scraper (see [design decisions](#design-decisions-and-the-alternatives-i-turned-down)) — dead weight to remove.
-- **Write-only LinkedIn scope** — the app can post a comment but can't confirm, read, or delete it afterward.
 
 ---
 
