@@ -211,8 +211,6 @@ Other known trade-offs:
 - **Leftover Puppeteer plumbing** in the Dockerfile and webpack config from the abandoned scraper (see above) — dead weight to remove.
 - **Write-only LinkedIn scope** — the app can post a comment but can't confirm or delete it afterward.
 
-> Note: an older `SYSTEM_DESIGN.md` in this repo contains aspirational figures (uptime, concurrency, a future database schema) that the current code does not implement. This README describes what's actually built.
-
 ---
 
 ## Tech stack
